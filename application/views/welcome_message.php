@@ -83,6 +83,9 @@
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 </div>
+<?php
+echo form_input('username','johndoe');
+?>
 
 </body>
 </html>
