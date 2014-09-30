@@ -13,14 +13,21 @@ class Blog extends CI_Controller
 		// $this->load->scaffolding('entries');
 		$this->load->helper('url');
 		$this->load->helper('form');
+        $this->load->library('session');
 	}
 	function index(){
-		$data['title']="My Blog Title";
-		$data['heading']="My Blog Heading";
-		$data['todo']=array('clean house','eat lunch','call man');
-		$data['query']=$this->db->get('entries');
-		// echo "Hello World";
-		$this->load->view('blog_view',$data);
+        $status=$this->session->userdata('status');
+        if($status!='OK'){
+            redirect('login');
+        }else{
+            $data['title']="My Blog Title";
+            $data['heading']="My Blog Heading";
+            $data['todo']=array('clean house','eat lunch','call man');
+            $data['query']=$this->db->get('entries');
+            // echo "Hello World";
+            $this->load->view('blog_view',$data);
+        }
+
 	}
 	function comments(){
 		$data['title']="My Comment Title";

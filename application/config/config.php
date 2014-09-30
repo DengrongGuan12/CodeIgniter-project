@@ -16,6 +16,7 @@
 */
 $config['base_url']	= '';
 $config['css']='application/views/css/mystyle1.css';
+$config['smileys']='application/images/smileys/';
 
 /*
 |--------------------------------------------------------------------------
@@ -225,7 +226,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'gdr121250037';
 
 /*
 |--------------------------------------------------------------------------
