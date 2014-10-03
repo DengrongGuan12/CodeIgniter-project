@@ -16,7 +16,7 @@ class Start extends CI_Controller{
         $this->css=$this->config->item('css');
 
     }
-    function hello($name){
+    function hello($name='default name'){
         $data['css']=$this->css;
         $data['base']=$this->base;
         $data['mytitle']='welcome to this site!';
