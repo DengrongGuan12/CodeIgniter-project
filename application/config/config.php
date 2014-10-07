@@ -16,6 +16,8 @@
 */
 $config['base_url']	= '';
 $config['css']='application/views/css';
+$config['js']='application/views/js';
+$config['images']='application/views/images';
 $config['smileys']='application/images/smileys/';
 
 /*
