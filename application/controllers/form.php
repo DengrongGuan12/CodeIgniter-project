@@ -1,0 +1,29 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: gdr
+ * Date: 2014/10/6
+ * Time: 22:43
+ */
+class Form extends CI_Controller{
+    function index()
+    {
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('myform');
+        }
+        else
+        {
+            $this->load->view('formsuccess');
+        }
+    }
+}
