@@ -45,19 +45,17 @@ class Pages extends CI_Controller{
     public function login(){
        $name=$_POST['name'];
        $password=$_POST['password'];
-        echo  $password;
        $this->load->model('user_model');
        $real_password=$this->user_model->getPasswordByName($name);
-        echo $real_password;
         if($real_password===$password){
             $newdata=array(
                 'status'=>'OK',
                 'name'=>$name
             );
             $this->session->set_userdata($newdata);
-            redirect('pages/views');
+            redirect('pages/test');
         }else{
-            redirect('pages/views');
+            redirect('pages/test');
         }
 
     }
@@ -90,6 +88,24 @@ class Pages extends CI_Controller{
         $this->load->view('pages/'.$page, $data);
         $this->load->view('templates/footer', $data);
 
+    }
+    public function test(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+        $this->load->view('index', $data);
+
+    }
+    public function loginpage(){
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $this->load->view('login',$data);
     }
 }
 ?>
