@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo "$base/$css/"."signin.css";?>" rel="stylesheet">
     <link href="<?php echo "$base/$css/"."starter-template.css";?>" rel="stylesheet">
+    <link href="<?php echo "$base/$css/"."common.css";?>" rel="stylesheet">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
@@ -23,6 +24,18 @@
 
 
     <style type="text/css">
+        .navbar .nav > li .dropdown-menu {
+            margin: 0;
+        }
+        .navbar .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav > li > a{
+            padding: 0px 0px !important;
+        }
+        .nav > li > a:hover{
+            background:none !important;
+        }
         /*解决IE6闪动问题 start*/
         *html{background-image:url(about:blank);background-attachment:fixed;}
         /* toTop */
@@ -32,10 +45,6 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#no_login_name').hide();
-            $('#no_login_password').hide();
-            $('#too_long_name').hide();
-            $('#too_long_password').hide();
             /*返回顶部*/
             $('#roll_top').hide();
 
@@ -174,28 +183,29 @@
             </form>
             <?php if($status!='OK'):?>
                 <div class="navbar-form navbar-right">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#login">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#login">
                         登录
                     </button>
-                    <button class="btn btn-success" data-toggle="modal" data-target="#sign">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#sign">
                         注册
                     </button>
                 </div>
             <?php else:?>
-                <div class="navbar-right" style="margin-top: 5px">
-                    <a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/self_info" style="text-decoration: none;"><img src="<?php echo "$base/$heads/"."default.gif";?>" style="width: 40px;height: 40px" class="img-rounded">
-                        <font color="#f0ffff"><?php echo $name;?></font>
+                <div class="navbar-right dropdown" style="margin-top: 5px">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/self_info" style="text-decoration: none;"><img src="<?php echo "$base/$heads/"."default.gif";?>" style="width: 40px;height: 40px" class="img-rounded">
+                                <font color="#f0ffff"><?php echo $name;?></font>
 
-                    </a>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">留言板</a></li>
+                                <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/self_info">管理</a></li>
+                                <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/logout">退出</a></li>
 
-                    <div class="aw-user-nav-dropdown-list pull-right">
-
-                        <ul>
-
-                        </ul>
-
-                    </div>
-
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
 
             <?php endif;?>
