@@ -6,7 +6,7 @@
     padding: 15px;
     margin: 0px auto;
 }
-.form-signin .form-signin-heading, .form-signin .checkbox {
+.form-signin .form-signin-heading, .form-signin {
     margin-bottom: 10px;
 }
 .form-signin .form-control {
@@ -18,6 +18,8 @@
 }
 .form-signin .checkbox {
     font-weight: normal;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 .form-signin input[type="email"] {
     margin-bottom: -1px;

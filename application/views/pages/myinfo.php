@@ -1,0 +1,1 @@
+<?=anchor('pages/logout','exit');?>

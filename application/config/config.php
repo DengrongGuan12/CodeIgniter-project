@@ -19,7 +19,7 @@ $config['css']='application/views/css';
 $config['js']='application/views/js';
 $config['images']='application/views/images';
 $config['smileys']='application/images/smileys/';
-
+$config['heads']='application/images/heads/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -48,7 +48,7 @@ $config['index_page'] = 'index.php';
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol']	= 'PATH_INFO';
 
 /*
 |--------------------------------------------------------------------------
