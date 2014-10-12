@@ -164,7 +164,7 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -175,6 +175,17 @@
             <a class="navbar-brand" href="#">Geek Q and A</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
+            <div class="navbar-form navbar-left">
+                <button class="btn btn-default">
+                    问题
+                </button>
+                <button class="btn btn-default">
+                    标签
+                </button>
+                <button class="btn btn-default">
+                    用户
+                </button>
+            </div>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="搜索问题">
@@ -191,6 +202,7 @@
                     </button>
                 </div>
             <?php else:?>
+
                 <div class="navbar-right dropdown" style="margin-top: 5px">
                     <ul class="nav">
                         <li class="dropdown">
@@ -206,6 +218,11 @@
                             </ul>
                         </li>
                     </ul>
+                </div>
+                <div class="navbar-form">
+                    <button class="btn btn-default">
+                        提问
+                    </button>
                 </div>
 
             <?php endif;?>
