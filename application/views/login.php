@@ -14,13 +14,15 @@
 	<section>
 		<h1><strong>Geek</strong> Q and A</h1>
 		<form method="post" action="http://127.0.0.1/CodeIgniter-project/index.php/pages/login">
-			<input type="text" placeholder="用户名" name="name"/>
-			<input placeholder="密码" type="password" name="password"/>
-			<button class="blue" type="submit">Login</button>
+			<input type="text" placeholder="用户名" name="name" required/>
+			<input placeholder="密码" type="password" name="password" required/>
+            <?php if($success==0):?>
+                <font color="#dc143c">用户名或密码错误！</font>
+            <?php endif;?>
+			<button class="blue" type="submit">登录</button>
 		</form>
-		<p><a href="#">Forgot your password?</a></p>
 	</section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="<?php echo "$base/$js/"."jquery.min.js";?>"></script>
 <script type="text/javascript">
 // Page load delay by Curtis Henson - http://curtishenson.com/articles/quick-tip-delay-page-loading-with-jquery/
 $(function(){

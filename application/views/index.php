@@ -31,7 +31,7 @@
 	<div class="buttons">
         <?php if($status!='OK'):?>
             <span class="button blue"><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/loginpage">登录</a></span>
-            <span class="button blue"><a href="register.html">注册</a></span>
+            <span class="button blue"><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/registerpage">注册</a></span>
         <?php else:?>
             <span class="button dropdown">
 			<a href="#">留言板 <span class="pip">4</span></a>
@@ -68,7 +68,7 @@
 		</span>
             <span class="button">提问</span>
             <span class="button">管理</span>
-            <span class="button blue"><a href="http://CodeIgniter-project/index.php/pages/logout">退出</a></span>
+            <span class="button blue"><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/logout">退出</a></span>
 
         <?php endif;?>
 
@@ -77,31 +77,38 @@
 </div>
 <nav>
 	<ul>
-		<li class="section"><a href="index.html"><span class="icon">&#128711;</span> Dashboard</a></li>
+		<li class="section"><a href="index.html"><span class="icon">&#128711;</span>Geek Q and A</a></li>
 		<li>
-			<a href="pages-table.html"><span class="icon">&#128196;</span> Pages</a>
+			<a href="pages-table.html"><span class="icon">&#128196;</span> 等待回答</a>
 			<ul class="submenu">
-				<li><a href="page-new.html">Create page</a></li>
-				<li><a href="page-timeline.html">View pages</a></li>
+				<li><a href="page-new.html">最新</a></li>
+				<li><a href="page-timeline.html">热门</a></li>
 			</ul>	
 		</li>
 		<li>
-			<a href="files.html"><span class="icon">&#127748;</span> Media <span class="pip">7</span></a>
+			<a href="files.html"><span class="icon">&#127748;</span> 热门问答<span class="pip">7</span></a>
 			<ul class="submenu">
-				<li><a href="files-upload.html">Upload file</a></li>
-				<li><a href="files.html">View files</a></li>
+				<li><a href="files-upload.html">周最热</a></li>
+				<li><a href="files.html">月最热</a></li>
 			</ul>
 		</li>
 		<li>
-			<a href="blog-timeline.html"><span class="icon">&#59160;</span> Blog <span class="pip">12</span></a>
+			<a href="blog-timeline.html"><span class="icon">&#59160;</span> 标签<span class="pip">12</span></a>
 			<ul class="submenu">
-				<li><a href="blog-new.html">New post</a></li>
-				<li><a href="blog-table.html">All posts</a></li>
-				<li><a href="comments-timeline.html">View comments</a></li>
+				<li><a href="blog-new.html">热门</a></li>
+				<li><a href="blog-table.html">所有标签</a></li>
+<!--				<li><a href="comments-timeline.html">View comments</a></li>-->
 			</ul>
 		</li>
-		<li><a href="statistics.html"><span class="icon">&#128202;</span> Statistics</a></li>
-		<li><a href="users.html"><span class="icon">&#128101;</span> Users <span class="pip">3</span></a></li>
+		<li><a href="users.html"><span class="icon">&#128101;</span> 用户 <span class="pip">3</span></a>
+            <ul class="submenu">
+                <li><a href="blog-new.html">所有用户</a></li>
+                <li><a href="blog-table.html">新用户</a></li>
+                <li><a href="blog-table.html">积分最多</a></li>
+                <!--				<li><a href="comments-timeline.html">View comments</a></li>-->
+            </ul>
+
+        </li>
 		<li>
 			<a href="ui-elements.html"><span class="icon">&#9881;</span> UI Elements</a>
 			<ul class="submenu">

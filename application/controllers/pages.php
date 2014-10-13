@@ -55,13 +55,13 @@ class Pages extends CI_Controller{
             $this->session->set_userdata($newdata);
             redirect('pages/test');
         }else{
-            redirect('pages/test');
+            redirect('pages/loginpage/0');
         }
 
     }
     public function logout(){
         $this->session->sess_destroy();
-        redirect('pages/views');
+        redirect('pages/test');
     }
     public function sign(){
         $name=$_POST['name'];
@@ -102,10 +102,20 @@ class Pages extends CI_Controller{
         $this->load->view('index', $data);
 
     }
-    public function loginpage(){
+    public function loginpage($success=1){
         $data['base']=$this->base;
         $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['success']=$success;
         $this->load->view('login',$data);
+    }
+    public function registerpage($success=1){
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['success']=$success;
+        $this->load->view('register',$data);
+
     }
 }
 ?>
