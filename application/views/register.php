@@ -15,18 +15,46 @@
     <h1><strong>Geek</strong> Q and A</h1>
     <form method="post" action="http://127.0.0.1/CodeIgniter-project/index.php/pages/sign">
         <input type="text" placeholder="用户名" name="name" required/>
-        <input placeholder="密码" type="password" name="password" required/>
-        <input placeholder="确认密码" type="password" name="password" required/>
+        <input id="passwd1" placeholder="密码" type="password" name="password" required/>
+        <input id="passwd2" placeholder="确认密码" type="password" name="password" required/>
         <?php if($success==0):?>
             <font color="#dc143c">该用户名已经被注册，请重新输入用户名！</font>
         <?php endif;?>
-        <button class="blue" type="submit">注册</button>
+        <button id="reg-button" class="blue" type="submit" onclick="checkPasswords();" >注册</button>
     </form>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="<?php echo "$base/$js/"."jquery.min.js";?>"></script>
 <script type="text/javascript">
     // Page load delay by Curtis Henson - http://curtishenson.com/articles/quick-tip-delay-page-loading-with-jquery/
+    function checkPasswords() {
+        var pass1 = document.getElementById("passwd1");
+        var pass2 = document.getElementById("passwd2");
+
+        if (pass1.value != pass2.value){
+            pass1.setCustomValidity("两次输入的密码不匹配");
+//            return false;
+        }else{
+            pass1.setCustomValidity("");
+//            return true;
+        }
+
+    }
+//    function check_passwords() {
+//        var passwd1=$('#passwd1').attr("value");
+//        var passwd2=$('#passwd2').attr("value");
+//        if(passwd1==passwd2){
+//            $('#error').fadeOut();
+//            return true;
+//        }else{
+//            $('#error').fadeIn();
+//            return false;
+//
+//        }
+//
+//
+//    }
     $(function(){
+//       $('#error').hide();
 //	$('.login button').click(function(e){
 //		// Get the url of the link
 //		var toLoad = $(this).attr('href');

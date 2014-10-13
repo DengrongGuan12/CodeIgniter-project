@@ -66,6 +66,19 @@ class Pages extends CI_Controller{
     public function sign(){
         $name=$_POST['name'];
         $password=$_POST['password'];
+        $date=date('Y-m-d H:i:s',time());
+        $this->load->model('user_model');
+        if($this->user_model->insert_user($name,$password,$date)==0){
+            redirect("pages/registerpage/0");
+        }else{
+            $newdata=array(
+                'status'=>'OK',
+                'name'=>$name
+            );
+            $this->session->set_userdata($newdata);
+            redirect('pages/test');
+
+        }
 
 
     }
@@ -89,9 +102,14 @@ class Pages extends CI_Controller{
         $this->load->view('templates/footer', $data);
 
     }
-    public function test(){
+    public function test($page="index"){
         $status=$this->session->userdata('status');
         $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/'.$page.'.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
         $data['status']=$status;
         $data['name']=$name;
         $data['base']=$this->base;
@@ -99,7 +117,9 @@ class Pages extends CI_Controller{
         $data['js']=$this->js;
         $data['images']=$this->images;
         $data['heads']=$this->heads;
-        $this->load->view('index', $data);
+        $this->load->view('templates/header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('templates/footer', $data);
 
     }
     public function loginpage($success=1){
