@@ -102,7 +102,7 @@ class Pages extends CI_Controller{
         $this->load->view('templates/footer', $data);
 
     }
-    public function test($page="index"){
+    public function test($page="index",$info=""){
         $status=$this->session->userdata('status');
         $name=$this->session->userdata('name');
         if ( ! file_exists(APPPATH.'/views/'.$page.'.php'))
@@ -117,6 +117,7 @@ class Pages extends CI_Controller{
         $data['js']=$this->js;
         $data['images']=$this->images;
         $data['heads']=$this->heads;
+        $data['info']=$info;
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer', $data);
@@ -136,6 +137,29 @@ class Pages extends CI_Controller{
         $data['success']=$success;
         $this->load->view('register',$data);
 
+    }
+    public function do_upload(){
+        $config['upload_path'] = 'application/images/heads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['file_name']=$this->session->userdata('name').'.gif';
+        $config['overwrite']=true;
+        $config['max_size'] = '2000';
+        $config['max_width']  = '0';
+        $config['max_height']  = '0';
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload())
+        {
+            $error = "<font color='#dc143c'>尚未选择文件或者文件大小不符合要求！</font>";
+
+            $this->test('myinfo',$error);
+        }
+        else
+        {
+            $success="<font color='blue'>上传成功！</font>";
+            $this->test('myinfo',$success);
+        }
     }
 }
 ?>

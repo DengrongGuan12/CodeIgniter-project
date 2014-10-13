@@ -24,7 +24,18 @@
             </div>
         <?php else:?>
             <div class="profile-img">
-                <p><img src="<?php echo "$base/$heads/"."default.gif";?>" alt="" height="40" width="40" /> 欢迎回来,<?php echo $name;?></p>
+                <p><img src="<?php
+                    $file = "http://127.0.0.1/CodeIgniter-project/application/images/heads/gdr.gif";
+                    $fileExists = @file_get_contents($file,null,null,-1,1) ? true : false ;
+                    if($fileExists){
+                        echo "$base/$heads/"."$name".".gif";
+
+                    }else{
+                        echo "$base/$heads/"."default.gif";
+
+                    }
+
+                    ?>" alt="" height="40" width="40" /> 欢迎回来,<?php echo $name;?></p>
             </div>
         <?php endif;?>
 

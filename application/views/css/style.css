@@ -62,11 +62,11 @@ table {
 
 @font-face {
     font-family: 'entypo';
-    src: url('../_40font-face/entypo.eot');
-    src: url('../_40font-face/entypo.eot@#iefix') format('embedded-opentype'),
-         url('../_40font-face/entypo.woff') format('woff'),
-         url('../_40font-face/entypo.ttf') format('truetype'),
-         url('../_40font-face/entypo.svg#entypo') format('svg');
+    src: url('http://127.0.0.1/CodeIgniter-project/application/views/_40font-face/entypo.eot');
+    src: url('http://127.0.0.1/CodeIgniter-project/application/views/_40font-face/entypo.eot@#iefix') format('embedded-opentype'),
+         url('http://127.0.0.1/CodeIgniter-project/application/views/_40font-face/entypo.woff') format('woff'),
+         url('http://127.0.0.1/CodeIgniter-project/application/views/_40font-face/entypo.ttf') format('truetype'),
+         url('http://127.0.0.1/CodeIgniter-project/application/views/_40font-face/entypo.svg#entypo') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -845,7 +845,7 @@ ul li:hover .pip, ul li.section .pip {
 ul.notice {
 	position: absolute;
 	left: -1px;
-	top: 37px;
+	top: 34px;
 	border: 1px solid rgba(0, 0, 0, .3);
 	background: #313131;
 	z-index: 10000;
@@ -1190,7 +1190,7 @@ ul.settings-dd li label {
 	height: 250px;
 	width: 250px;
 	margin: auto;
-	background: url(../images/loading.gif) 50% 50% no-repeat;
+	background: url(http://127.0.0.1/CodeIgniter-project/application/views/images/loading.gif) 50% 50% no-repeat;
 }
 
 /** TABLE STYLES **/
@@ -1264,7 +1264,7 @@ table#myTable td {
 }
 
 table#myTable thead tr .header {
-	background-image: url('../images/bg.gif');
+	background-image: url('http://127.0.0.1/CodeIgniter-project/application/views/images/bg.gif');
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
@@ -1272,11 +1272,11 @@ table#myTable thead tr .header {
 }
 
 table#myTable thead tr .headerSortUp {
-	background-image: url('../images/asc.gif');
+	background-image: url('http://127.0.0.1/CodeIgniter-project/application/views/images/asc.gif');
 }
 
 table#myTable thead tr .headerSortDown {
-	background-image: url('../images/desc.gif');
+	background-image: url('http://127.0.0.1/CodeIgniter-project/application/views/images/desc.gif');
 }
 
 table#myTable thead tr .headerSortDown, table#myTable thead tr .headerSortUp {
@@ -1397,7 +1397,7 @@ body.login {
 	height: 30px;
 }
 .jquery-checkbox img{
-	background: transparent url(../images/checkbox.png) no-repeat;
+	background: transparent url(http://127.0.0.1/CodeIgniter-project/application/views/images/checkbox.png) no-repeat;
 }
 
 .jquery-checkbox img{
@@ -1486,7 +1486,7 @@ div.wysiwyg ul.toolbar li {
 	display: block;
 	width: 30px;
 	height: 30px;
-	background:#313131 url('../images/jquery.wysiwyg.png') no-repeat -640px -800px;
+	background:#313131 url('http://127.0.0.1/CodeIgniter-project/application/views/images/jquery.wysiwyg.png') no-repeat -640px -800px;
 	border:1px solid #262626 !important;
 	border-radius:2px;
 	box-shadow:0 1px 0 #4e4e4e, inset 0 0 8px rgba(0, 0, 0, .1);
@@ -1494,7 +1494,7 @@ div.wysiwyg ul.toolbar li {
 	margin: 0 3px 3px 0;
 }
 div.wysiwyg ul.toolbar li.wysiwyg-button-hover, div.wysiwyg ul.toolbar li.active {
-	background:#139ae7 url('../images/jquery.wysiwyg.png') no-repeat -640px -800px;
+	background:#139ae7 url('http://127.0.0.1/CodeIgniter-project/application/views/images/jquery.wysiwyg.png') no-repeat -640px -800px;
 	border-radius:3px;
 	border:1px solid #2f2f2f !important;
 }
@@ -1866,14 +1866,14 @@ only screen and (min-resolution: 192dpi),
 only screen and (min-resolution: 2dppx) { 
 
 	div.wysiwyg ul.toolbar li {
-		background:#313131 url('../images/jquery.wysiwyg-retina.png') no-repeat;
+		background:#313131 url('http://127.0.0.1/CodeIgniter-project/application/views/images/jquery.wysiwyg-retina.png') no-repeat;
 		background-size: 180px !important;
 	}
 	
 	div.wysiwyg ul.toolbar li.bold { background-position: 0 0; background-size: 180px !important;}
   
 	.jquery-checkbox img{
-		background: transparent url(../images/checkbox-retina.png) no-repeat;
+		background: transparent url(http://127.0.0.1/CodeIgniter-project/application/views/images/checkbox-retina.png) no-repeat;
 		background-size: 75px auto;
 	}
 
@@ -1881,7 +1881,7 @@ only screen and (min-resolution: 2dppx) {
 		height: 250px;
 		width: 250px;
 		margin: auto;
-		background: url(../images/loading-retina.gif) 50% 50% no-repeat;
+		background: url(http://127.0.0.1/CodeIgniter-project/application/views/images/loading-retina.gif) 50% 50% no-repeat;
 		background-size: 75px !important;
 	}
 
