@@ -118,6 +118,10 @@ class Pages extends CI_Controller{
         $data['images']=$this->images;
         $data['heads']=$this->heads;
         $data['info']=$info;
+
+        $this->load->model('user_model');
+
+        $data['credit']=$this->user_model->getCreditByName($name);
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer', $data);
@@ -161,5 +165,14 @@ class Pages extends CI_Controller{
             $this->test('myinfo',$success);
         }
     }
+    public function changePassword(){
+        $new_password=$_POST['password'];
+        $name=$this->session->userdata('name');
+        $this->load->model('user_model');
+        $this->user_model->setPasswordByname($name,$new_password);
+        echo "<font color='aqua'>修改成功！</font>";
+
+    }
+    public function
 }
 ?>

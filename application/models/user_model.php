@@ -53,4 +53,23 @@ class User_model extends CI_Model{
         return $password;
 
     }
+    public function setPasswordByName($name,$new_password){
+        $data = array(
+            'password'=>$new_password
+        );
+
+        $this->db->where('name', $name);
+        $this->db->update('user', $data);
+    }
+    public function getCreditByName($name){
+        $credit=0;
+        $query = $this->db->get_where('user', array('name' => $name));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $credit=$row['credit'];
+        }
+        return $credit;
+
+    }
 }
