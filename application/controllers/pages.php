@@ -82,30 +82,10 @@ class Pages extends CI_Controller{
 
 
     }
-    public function self_info($page='myinfo'){
+    public function myinfo($info=""){
         $status=$this->session->userdata('status');
         $name=$this->session->userdata('name');
-        if ( ! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
-        {
-            // 页面不存在
-            show_404();
-        }
-        $data['status']=$status;
-        $data['name']=$name;
-        $data['base']=$this->base;
-        $data['css']=$this->css;
-        $data['js']=$this->js;
-        $data['images']=$this->images;
-        $data['heads']=$this->heads;
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/'.$page, $data);
-        $this->load->view('templates/footer', $data);
-
-    }
-    public function test($page="index",$info=""){
-        $status=$this->session->userdata('status');
-        $name=$this->session->userdata('name');
-        if ( ! file_exists(APPPATH.'/views/'.$page.'.php'))
+        if ( ! file_exists(APPPATH.'/views/myinfo.php'))
         {
             // 页面不存在
             show_404();
@@ -122,6 +102,60 @@ class Pages extends CI_Controller{
         $this->load->model('user_model');
 
         $data['credit']=$this->user_model->getCreditByName($name);
+
+        $this->load->model('qanda_model');
+//        $ids=array();
+        $titles=array();
+        $contents=array();
+        $ids=$this->qanda_model->getQidByName($name);
+        foreach($ids as $id){
+            $titles[$id]=$this->qanda_model->getTitleById($id);
+            $contents[$id]=$this->qanda_model->getContentById($id);
+//            array_push($titles,$this->qanda_model->getTitleById($id));
+//            array_push($contents,$this->qanda_model->getQContentById($id));
+
+        }
+        $data['ids']=$ids;
+        $data['titles']=$titles;
+        $data['contents']=$contents;
+
+        $to_ids=$this->qanda_model->getTo_idByName($name);
+        $i=0;
+        $Acontents=array();
+        $AqIds=array();
+        foreach(array_keys($to_ids) as $id){
+            $Acontents[$i]=$this->qanda_model->getContentById($id);
+            $AqIds[$i]=$this->qanda_model->getQidByTo_id($to_ids[$id]);
+            $i=$i+1;
+
+//            array_push($Acontents,$this->qanda_model->getContentById($id));
+
+//            $Acontent[$this->qanda_model->getQidByTo_id($to_ids[$id])]=$this->qanda_model->getContentById($id);
+        }
+        $data['AqIds']=$AqIds;
+        $data['Acontents']=$Acontents;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('myinfo', $data);
+        $this->load->view('templates/footer', $data);
+
+    }
+    public function test($page="index"){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/'.$page.'.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer', $data);
@@ -156,13 +190,15 @@ class Pages extends CI_Controller{
         if ( ! $this->upload->do_upload())
         {
             $error = "<font color='#dc143c'>尚未选择文件或者文件大小不符合要求！</font>";
+            echo($error);
 
-            $this->test('myinfo',$error);
+//            $this->myinfo($error);
         }
         else
         {
             $success="<font color='blue'>上传成功！</font>";
-            $this->test('myinfo',$success);
+            echo($success);
+//            $this->myinfo($success);
         }
     }
     public function changePassword(){
@@ -173,6 +209,5 @@ class Pages extends CI_Controller{
         echo "<font color='aqua'>修改成功！</font>";
 
     }
-    public function
 }
 ?>

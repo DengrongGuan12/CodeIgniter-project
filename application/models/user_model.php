@@ -72,4 +72,17 @@ class User_model extends CI_Model{
         return $credit;
 
     }
+    public function addCreditByName($name,$add){
+        $credit=$this->getCreditByName($name)+$add;
+        $this->setCreditByName($name,$credit);
+
+    }
+    public function setCreditByName($name,$credit){
+        $data = array(
+            'credit'=>$credit
+        );
+
+        $this->db->where('name', $name);
+        $this->db->update('user', $data);
+    }
 }
