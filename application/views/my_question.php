@@ -20,19 +20,127 @@
                 <?php endif;?>
             </aside>
         </header>
-        <div class="content">
-            <div class="field-wrap">
-                <input type="text" value="Title"/>
+        <div class="content no-padding timeline">
+            <?php foreach(array_keys($answers) as $aid):?>
+                <div class="tl-post comments">
+                    <span class="icon">&#59168;</span>
+                    <p>
+
+                        John Doe:
+                        Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed
+                        diam nonummy.sdfasfsadfasdfsadfasdfasdfsadfasdfsadfasdfsadfsadfasdfasdfasdfsadfsadf
+                        <br />
+                        <br />
+                        <button>赞</button>
+                        <button>认同此答案</button>
+                        <button>追问</button>
+                    </p>
+                </div>
+            <?php endforeach;?>
+
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
             </div>
-            <div class="field-wrap">
-                <input type="text" value="Author"/>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
             </div>
-            <div class="field-wrap">
-                <input type="text" value="Tags"/>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
             </div>
-            <div class="field-wrap wysiwyg-wrap">
-                <textarea class="post" rows="5"></textarea>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
             </div>
-            <button type="submit" class="green">Post</button> <button type="submit" class="">Preview</button>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum..
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>How to design for retina display</strong><br />
+                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
+            <div class="tl-post comments">
+                <span class="icon">&#59168;</span>
+                <p>
+                    <strong>The best designs of 2012</strong><br />
+                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
+                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
+                </p>
+            </div>
         </div>
     </section>

@@ -74,7 +74,7 @@ class Question extends CI_Controller{
         $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
         foreach(array_keys($answers) as $aid){
             $content=$answers[$aid];
-            $answers[$aid]=array($this->praise_model->ifPraise($name,$id),$content);
+            $answers[$aid]=array($this->praise_model->ifPraise($name,$id),$content,$this->qanda_model->getUserById($id));
         }
         $data['answers']=$answers;
 

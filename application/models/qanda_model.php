@@ -130,6 +130,16 @@ class Qanda_model extends CI_Model{
         $this->db->where('id', $id);
         $this->db->delete('qanda');
     }
+    public function getUserById($id){
+        $this->db->select('user_name');
+        $query = $this->db->get_where('qanda', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $user_name=$row['user_name'];
+        }
+        return $user_name;
+    }
 
 }
 ?>
