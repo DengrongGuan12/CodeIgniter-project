@@ -11,9 +11,9 @@
             <aside>
 
                 <?php if($ifPraise):?>
-                    <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praise/".$id);?>><button>取消赞 <?=$praise_count?></button></a>
+                    <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseQ/".$id);?>><button>取消赞 <?=$praise_count?></button></a>
                 <?php else:?>
-                    <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praise/".$id);?>><button>点赞 <?=$praise_count?></button></a>
+                    <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseQ/".$id);?>><button>点赞 <?=$praise_count?></button></a>
                 <?php endif;?>
                 <?php if(count($answers)==0):?>
                     <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/delete_my_question/".$id);?>><button>删除</button></a>
@@ -21,126 +21,47 @@
             </aside>
         </header>
         <div class="content no-padding timeline">
+            <div>
+                <p>
+                    <?php echo("内容：<br />".$content);?>
+                </p>
+            </div>
+            <?php if($end!=0):?>
+                <div class="tl-post comments">
+                    <span class="icon">&#59168;</span>
+                    <p>
+
+                        <?php echo($agree_answer[2]."的回答(已被认同):".$agree_answer[1]);?>
+                        <?php if($agree_answer[0]):?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseA/".$end."/".$id);?>><button>取消赞 <?=$agree_answer[3]?></button></a>
+                        <?php else:?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseA/".$end."/".$id);?>><button>点赞 <?=$agree_answer[3]?></button></a>
+                        <?php endif;?>
+
+                    </p>
+                </div>
+            <?php endif;?>
+
             <?php foreach(array_keys($answers) as $aid):?>
                 <div class="tl-post comments">
                     <span class="icon">&#59168;</span>
                     <p>
 
-                        John Doe:
-                        Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed
-                        diam nonummy.sdfasfsadfasdfsadfasdfasdfsadfasdfsadfasdfsadfsadfasdfasdfasdfsadfsadf
-                        <br />
-                        <br />
-                        <button>赞</button>
-                        <button>认同此答案</button>
-                        <button>追问</button>
+                        <?php echo($answers[$aid][2]."的回答:".$answers[$aid][1]);?>
+                        <?php if($answers[$aid][0]):?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseA/".$aid."/".$id);?>><button>取消赞 <?=$answers[$aid][3]?></button></a>
+                        <?php else:?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseA/".$aid."/".$id);?>><button>点赞 <?=$answers[$aid][3]?></button></a>
+                        <?php endif;?>
+                        <?php if($end==0):?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/agree/".$id."/".$aid);?>><button>认同此答案</button></a>
+                            <button>追问</button>
+                        <?php endif;?>
+
                     </p>
                 </div>
             <?php endforeach;?>
 
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum..
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>How to design for retina display</strong><br />
-                    <a href="#">John Doe says:</a> Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
-            <div class="tl-post comments">
-                <span class="icon">&#59168;</span>
-                <p>
-                    <strong>The best designs of 2012</strong><br />
-                    <a href="#">John Doe says:</a> Lorem ipsum dolor sit amet, consecteteur adipiscing elit sed diam nonummy.
-                    <span class="reply"><input type="text" value="Respond to comment..."/></span>
-                </p>
-            </div>
+
         </div>
     </section>

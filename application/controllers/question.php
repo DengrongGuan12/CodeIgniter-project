@@ -38,7 +38,28 @@ class Question extends CI_Controller{
         $data['images']=$this->images;
         $data['heads']=$this->heads;
 
-        $this->load->model();
+        $this->load->model('qanda_model');
+        $data['id']=$id;
+        $data['title']=$this->qanda_model->getTitleById($id);
+        $data['content']=$this->qanda_model->getContentById($id);
+        $data['credit']=$this->qanda_model->getCreditById($id);
+        $data['end']=$this->qanda_model->getIfEndById($id);
+        $this->load->model('praise_model');
+        $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
+        $data['praise_count']=$this->praise_model->getNameCountById($id);
+        $no_agree_answers=array();
+        $answers=$this->qanda_model->getAnswersByTo_id($id);
+        foreach(array_keys($answers) as $aid){
+            $content=$answers[$aid];
+            if($aid==$data['end']){
+                $data['agree_answer']=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
+                continue;
+            }
+
+            $no_agree_answers[$aid]=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
+        }
+        //尚未被认同的答案
+        $data['answers']=$no_agree_answers;
 
         $this->load->view('templates/header', $data);
         $this->load->view('single_question', $data);
@@ -68,15 +89,21 @@ class Question extends CI_Controller{
         $data['content']=$this->qanda_model->getContentById($id);
         $data['credit']=$this->qanda_model->getCreditById($id);
         $data['end']=$this->qanda_model->getIfEndById($id);
-        $answers=array();
+        $no_agree_answers=array();
         $answers=$this->qanda_model->getAnswersByTo_id($id);
         $this->load->model('praise_model');
         $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
         foreach(array_keys($answers) as $aid){
             $content=$answers[$aid];
-            $answers[$aid]=array($this->praise_model->ifPraise($name,$id),$content,$this->qanda_model->getUserById($id));
+            if($aid==$data['end']){
+                $data['agree_answer']=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
+                continue;
+            }
+
+            $no_agree_answers[$aid]=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
         }
-        $data['answers']=$answers;
+        //尚未被认同的答案
+        $data['answers']=$no_agree_answers;
 
         $data['praise_count']=$this->praise_model->getNameCountById($id);
 
@@ -86,17 +113,30 @@ class Question extends CI_Controller{
         $this->load->view('templates/footer', $data);
 
     }
-    public function cancel_praise($id){
+    public function cancel_praiseQ($id){
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->deleteByNameId($name,$id);
         redirect('question/my_question/'.$id);
     }
-    public function praise($id){
+    public function cancel_praiseA($aid,$qid){
+        $name=$this->session->userdata('name');
+        $this->load->model('praise_model');
+        $this->praise_model->deleteByNameId($name,$aid);
+        redirect('question/my_question/'.$qid);
+    }
+    public function praiseQ($id){
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->insert($name,$id);
         redirect('question/my_question/'.$id);
+    }
+    public function praiseA($aid,$qid){
+        $name=$this->session->userdata('name');
+        $this->load->model('praise_model');
+        $this->praise_model->insert($name,$aid);
+        redirect('question/my_question/'.$qid);
+
     }
     public function delete_my_question($id){
         $name=$this->session->userdata('name');
@@ -108,6 +148,98 @@ class Question extends CI_Controller{
         $this->load->model('praise_model');
         $this->praise_model->deleteById($id);
         redirect("pages/myinfo/");
+
+    }
+    public function agree($qid,$aid){
+        $this->load->model('qanda_model');
+        $this->qanda_model->setEndById($qid,$aid);
+        $this->load->model('user_model');
+        $this->user_model->addCreditByName($this->qanda_model->getUserById($aid),$this->qanda_model->getCreditById($qid));
+        redirect("question/my_question/".$qid);
+
+    }
+    public function my_all_questions(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/my_all_questions.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+
+        $this->load->model('qanda_model');
+//        $ids=array();
+        $titles=array();
+        $contents=array();
+        $dates=array();
+        $ids=$this->qanda_model->getQidByName($name,'all');
+        foreach($ids as $id){
+            $titles[$id]=$this->qanda_model->getTitleById($id);
+            $contents[$id]=$this->qanda_model->getContentById($id);
+            $dates[$id]=$this->qanda_model->getDateById($id);
+//            array_push($titles,$this->qanda_model->getTitleById($id));
+//            array_push($contents,$this->qanda_model->getQContentById($id));
+
+        }
+        $data['ids']=$ids;
+        $data['titles']=$titles;
+        $data['contents']=$contents;
+        $data['dates']=$dates;
+        $this->load->view('templates/header', $data);
+        $this->load->view('my_all_questions', $data);
+        $this->load->view('templates/footer', $data);
+
+
+    }
+    public function my_all_answers(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/my_all_answers.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $this->load->model('qanda_model');
+        $to_ids=$this->qanda_model->getTo_idByName($name,"all");
+        $i=0;
+        //回答的内容
+        $Acontents=array();
+        //回答的问题的id
+        $AqIds=array();
+        //回答的时间
+        $Adates=array();
+        foreach(array_keys($to_ids) as $id){
+            $Acontents[$i]=$this->qanda_model->getContentById($id);
+            $Adates[$i]=$this->qanda_model->getDateById($id);
+            $AqIds[$i]=$this->qanda_model->getQidByTo_id($to_ids[$id]);
+            $i=$i+1;
+
+//            array_push($Acontents,$this->qanda_model->getContentById($id));
+
+//            $Acontent[$this->qanda_model->getQidByTo_id($to_ids[$id])]=$this->qanda_model->getContentById($id);
+        }
+        $data['AqIds']=$AqIds;
+        $data['Acontents']=$Acontents;
+        $data['Adates']=$Adates;
+        $this->load->view('templates/header', $data);
+        $this->load->view('my_all_answers', $data);
+        $this->load->view('templates/footer', $data);
 
     }
 }

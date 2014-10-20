@@ -9,13 +9,18 @@ class Qanda_model extends CI_Model{
     public function __construct(){
         $this->load->database();
     }
-    public function getQidByName($name=""){
+    public function getQidByName($name="",$limit=""){
         $ids=array();
         $this->db->where('user_name',$name);
         $this->db->where('to_id',0);
         $this->db->select('id');
         $this->db->order_by("id", "desc");
-        $query = $this->db->get('qanda', 4, 0);
+        if($limit==""){
+            $query = $this->db->get('qanda', 4, 0);
+        }else if($limit=="all"){
+            $query = $this->db->get('qanda');
+        }
+
 //        $query = $this->db->get_where('qanda', array('name=' => $name));
         if ($query->num_rows() > 0)
         {
@@ -49,10 +54,14 @@ class Qanda_model extends CI_Model{
         return $content;
 
     }
-    public function getTo_idByName($name){
+    public function getTo_idByName($name,$limit=""){
         $to_ids=array();
-        $query = $this->db->query("SELECT id, to_id FROM qanda WHERE user_name = '$name' AND to_id!= 0 ORDER BY id desc LIMIT 4");
-//        $this->db->where('user_name',$name);
+        if($limit==""){
+            $query = $this->db->query("SELECT id, to_id FROM qanda WHERE user_name = '$name' AND to_id!= 0 ORDER BY id desc LIMIT 4");
+        }else if($limit=="all"){
+            $query = $this->db->query("SELECT id, to_id FROM qanda WHERE user_name = '$name' AND to_id!= 0 ORDER BY id desc");
+        }
+        //        $this->db->where('user_name',$name);
 //        $this->db->where('to_id!=',0);
 //        $this->db->select('id,to_id');
 //        $this->db->order_by("id", "desc");
@@ -69,6 +78,7 @@ class Qanda_model extends CI_Model{
 
 
     }
+    //循环查找直到找到问题id
     public function getQidByTo_id($to_id){
         while(TRUE){
             $id=$to_id;
@@ -139,6 +149,24 @@ class Qanda_model extends CI_Model{
             $user_name=$row['user_name'];
         }
         return $user_name;
+    }
+    public function setEndById($qid,$aid){
+        $data = array(
+            'end'=>$aid
+        );
+
+        $this->db->where('id', $qid);
+        $this->db->update('qanda', $data);
+    }
+    public function getDateById($id){
+        $this->db->select('date');
+        $query = $this->db->get_where('qanda', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $date=$row['date'];
+        }
+        return $date;
     }
 
 }

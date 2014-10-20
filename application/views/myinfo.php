@@ -192,7 +192,7 @@
             </div>
             <?php if(count($ids)>0):?>
 
-            <span class="show-more" style="margin-left: 36px"><a	 href="#">更多</a></span>
+            <span class="show-more" style="margin-left: 36px"><a	 href="http://127.0.0.1/CodeIgniter-project/index.php/question/my_all_questions/">更多</a></span>
             <?php endif;?>
         </section>
 
@@ -224,7 +224,7 @@
 
             </div>
             <?php if(count($Acontents)>0):?>
-            <span class="show-more" style="margin-left: 36px"><a	 href="#">更多</a></span>
+            <span class="show-more" style="margin-left: 36px"><a	 href="http://127.0.0.1/CodeIgniter-project/index.php/question/my_all_answers/">更多</a></span>
             <?php endif;?>
         </section>
 
