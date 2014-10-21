@@ -1,7 +1,5 @@
 <div class="widget-container">
-    <div style="height:80px">
-        Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-    </div>
+
 </div>
 </section>
 
@@ -19,6 +17,10 @@
 <script src="<?php echo "$base/$js/"."jquery.tablesorter.min.js";?>"></script>
 
 <script type="text/javascript">
+    $('#title-error').hide();
+    $('#content-error').hide();
+    $('#submit-error').hide();
+    $('#submit-success').hide();
     // Feature slider for graphs
     $('.cycle').cycle({
         fx: "scrollHorz",
@@ -27,6 +29,20 @@
         prev:    '.left-btn',
         next:    '.right-btn'
     });
+    function myCheckbox(obj,thisobj)
+    {
+        var o = document.getElementById(obj);
+        if(o.checked)
+        {
+            thisobj.style.backgroundColor="#f88";
+            o.checked = false;
+        }
+        else
+        {
+            thisobj.style.backgroundColor="#88f";
+            o.checked = true;
+        }
+    }
 </script>
 </body>
 </html>

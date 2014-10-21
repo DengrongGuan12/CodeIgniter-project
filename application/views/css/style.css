@@ -1428,7 +1428,7 @@ body.login {
 /** WYSIWYG EDITOR **/
 
 .field-wrap.wysiwyg-wrap {
-	height:180px;
+	height:650px;
 	position: relative;
 }
 
@@ -1568,7 +1568,7 @@ div.wysiwyg ul.toolbar li.cssWrap { background-position: -92px -106px; }
 
 div.wysiwyg-dialogRow { float:left; width:100%; font-size: 16px; }
 
-div.wysiwyg iframe { clear: left; background-color:white; padding:10px; margin:0; display:block; width: 100%; border:1px solid #e3e3e3; border-radius:0 0 5px 5px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100% !important; height: 120px !important}
+div.wysiwyg iframe { clear: left; background-color:white; padding:10px; margin:0; display:block; width: 100%; border:1px solid #e3e3e3; border-radius:0 0 5px 5px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100% !important; height: 600px !important}
 
 /* dialog */
 .wysiwyg-dialog { position:fixed; top:50px; left:50px; width:450px; height:280px; background:transparent; font:14px "Helvetic Neue", Helvetica,Arial,sans-serif; }
@@ -1915,3 +1915,14 @@ ul.icon-fonts li .html {
 	color: #999;
 	font-size: 12px;
 }
+.tags{
+
+}
+.tag-list{
+
+}
+.tag-list li{
+    width:50px; height:22px;margin: 2px;
+}
+.tag1 {background-color:#ffffff}
+.tag2 {background-color:#88f}

@@ -77,7 +77,7 @@
                 </li>
             </ul>
 		</span>
-                <span class="button">提问</span>
+                <span class="button"><a href="http://127.0.0.1/CodeIgniter-project/index.php/ask_question/ask">提问</a></span>
                 <span class="button"><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/myinfo">管理</a></span>
                 <span class="button blue"><a href="http://127.0.0.1/CodeIgniter-project/index.php/pages/logout">退出</a></span>
 

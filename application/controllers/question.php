@@ -22,6 +22,7 @@ class Question extends CI_Controller{
         $this->heads=$this->config->item('heads');
 
     }
+
     public function single_question($id=0){
         $status=$this->session->userdata('status');
         $name=$this->session->userdata('name');
@@ -40,15 +41,15 @@ class Question extends CI_Controller{
 
         $this->load->model('qanda_model');
         $data['id']=$id;
+        $data['publisher']=$this->qanda_model->getUserById($id);
         $data['title']=$this->qanda_model->getTitleById($id);
         $data['content']=$this->qanda_model->getContentById($id);
         $data['credit']=$this->qanda_model->getCreditById($id);
         $data['end']=$this->qanda_model->getIfEndById($id);
-        $this->load->model('praise_model');
-        $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
-        $data['praise_count']=$this->praise_model->getNameCountById($id);
         $no_agree_answers=array();
         $answers=$this->qanda_model->getAnswersByTo_id($id);
+        $this->load->model('praise_model');
+        $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
         foreach(array_keys($answers) as $aid){
             $content=$answers[$aid];
             if($aid==$data['end']){
@@ -60,56 +61,12 @@ class Question extends CI_Controller{
         }
         //尚未被认同的答案
         $data['answers']=$no_agree_answers;
+
+        $data['praise_count']=$this->praise_model->getNameCountById($id);
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('single_question', $data);
-        $this->load->view('templates/footer', $data);
-
-
-    }
-    public function my_question($id=0){
-        $status=$this->session->userdata('status');
-        $name=$this->session->userdata('name');
-        if ( ! file_exists(APPPATH.'/views/my_question.php'))
-        {
-            // 页面不存在
-            show_404();
-        }
-        $data['status']=$status;
-        $data['name']=$name;
-        $data['base']=$this->base;
-        $data['css']=$this->css;
-        $data['js']=$this->js;
-        $data['images']=$this->images;
-        $data['heads']=$this->heads;
-
-        $this->load->model('qanda_model');
-        $data['id']=$id;
-        $data['title']=$this->qanda_model->getTitleById($id);
-        $data['content']=$this->qanda_model->getContentById($id);
-        $data['credit']=$this->qanda_model->getCreditById($id);
-        $data['end']=$this->qanda_model->getIfEndById($id);
-        $no_agree_answers=array();
-        $answers=$this->qanda_model->getAnswersByTo_id($id);
-        $this->load->model('praise_model');
-        $data['ifPraise']=$this->praise_model->ifPraise($name,$id);
-        foreach(array_keys($answers) as $aid){
-            $content=$answers[$aid];
-            if($aid==$data['end']){
-                $data['agree_answer']=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
-                continue;
-            }
-
-            $no_agree_answers[$aid]=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
-        }
-        //尚未被认同的答案
-        $data['answers']=$no_agree_answers;
-
-        $data['praise_count']=$this->praise_model->getNameCountById($id);
-
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('my_question', $data);
         $this->load->view('templates/footer', $data);
 
     }
@@ -117,25 +74,25 @@ class Question extends CI_Controller{
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->deleteByNameId($name,$id);
-        redirect('question/my_question/'.$id);
+        redirect('question/single_question/'.$id);
     }
     public function cancel_praiseA($aid,$qid){
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->deleteByNameId($name,$aid);
-        redirect('question/my_question/'.$qid);
+        redirect('question/single_question/'.$qid);
     }
     public function praiseQ($id){
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->insert($name,$id);
-        redirect('question/my_question/'.$id);
+        redirect('question/single_question/'.$id);
     }
     public function praiseA($aid,$qid){
         $name=$this->session->userdata('name');
         $this->load->model('praise_model');
         $this->praise_model->insert($name,$aid);
-        redirect('question/my_question/'.$qid);
+        redirect('question/single_question/'.$qid);
 
     }
     public function delete_my_question($id){
@@ -155,7 +112,7 @@ class Question extends CI_Controller{
         $this->qanda_model->setEndById($qid,$aid);
         $this->load->model('user_model');
         $this->user_model->addCreditByName($this->qanda_model->getUserById($aid),$this->qanda_model->getCreditById($qid));
-        redirect("question/my_question/".$qid);
+        redirect("question/single_question/".$qid);
 
     }
     public function my_all_questions(){

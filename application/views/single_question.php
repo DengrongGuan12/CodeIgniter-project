@@ -15,6 +15,12 @@
                 <?php else:?>
                     <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseQ/".$id);?>><button>点赞 <?=$praise_count?></button></a>
                 <?php endif;?>
+                <?php if(count($answers)==0):?>
+                    <?php if($name==$publisher):?>
+                        <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/delete_my_question/".$id);?>><button>删除</button></a>
+                    <?php endif;?>
+
+                <?php endif;?>
             </aside>
         </header>
         <div class="content no-padding timeline">
@@ -49,6 +55,13 @@
                             <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseA/".$aid."/".$id);?>><button>取消赞 <?=$answers[$aid][3]?></button></a>
                         <?php else:?>
                             <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseA/".$aid."/".$id);?>><button>点赞 <?=$answers[$aid][3]?></button></a>
+                        <?php endif;?>
+                        <?php if($end==0):?>
+                            <?php if($name==$publisher):?>
+                                <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/agree/".$id."/".$aid);?>><button>认同此答案</button></a>
+                                <button>追问</button>
+                            <?php endif;?>
+
                         <?php endif;?>
 
                     </p>
