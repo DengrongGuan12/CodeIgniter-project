@@ -1926,3 +1926,9 @@ ul.icon-fonts li .html {
 }
 .tag1 {background-color:#ffffff}
 .tag2 {background-color:#88f}
+.add:before {
+    content: "✚";
+}
+.delete:before {
+    content: "✘";
+}

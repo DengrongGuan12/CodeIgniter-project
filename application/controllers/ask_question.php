@@ -38,6 +38,14 @@ class Ask_question extends CI_Controller{
         $data['images']=$this->images;
         $data['heads']=$this->heads;
 
+        $this->load->model('tag_model');
+        $data['tags']=$this->tag_model->getAllTags();
+        $this->load->model('user_model');
+        $data['credit']=$this->user_model->getCreditByName($name);
+
+
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('ask', $data);
         $this->load->view('templates/footer', $data);

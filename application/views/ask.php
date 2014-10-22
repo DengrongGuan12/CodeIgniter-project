@@ -25,14 +25,52 @@
                 <div id="content-error" class="red" style="margin-top: 0px;">
                     <p>内容不能为空！</p>
                 </div>
-                <div class="tags">
+                <div class="tags" id="tags" style="margin-bottom: 5px;">
                     选择所属标签:
-                    <ul class="tag-list">
-                        <li class="tag1" id="cc" onclick="myCheckbox('cc',this);" onmouseover="this.className='tag2'" onmouseout="this.className='tag1'">html</li>
-
-                    </ul>
+                    <select name="tag1" id="tag1">
+                        <?php foreach(array_keys($tags) as $id):?>
+                            <option value=<?php echo($id);?>><?php echo($tags[$id]);?></option>
+                        <?php endforeach;?>
+                    </select>
+<!--                    <ul class="tag-list">-->
+<!--                        <li class="tag1" id="cc" onclick="myCheckbox('cc',this);" onmouseover="this.className='tag2'" onmouseout="this.className='tag1'">html</li>-->
+<!---->
+<!--                    </ul>-->
                 </div>
                 <br />
+                <div style="margin-bottom: 5px; margin-left: -5px;">
+                    <a class="button add" href="javascript:addTag()">添加标签</a>
+                    <a class="button delete" href="javascript:deleteTag()">删除标签</a>
+                </div>
+
+                <br />
+                <script type="text/javascript">
+                    var count= 1 ;
+                    var maxTag = 5;
+                    function addTag(){
+                        if(count >= maxTag){
+                            alert("最多5个标签！");return;//限制最多maxfile个文件框
+                        }
+                        count++;
+                        //自增id不同的HTML对象，并附加到容器最后
+                        var newSelect="<select name=tag"+count+" id=tag"+count+">"
+                            <?php foreach(array_keys($tags) as $id):?>
+                            +"<option value=<?php echo($id);?>><?php echo($tags[$id]);?></option>"
+                            <?php endforeach;?>
+                            +"</select>";
+                        document.getElementById("tags").insertAdjacentHTML("beforeEnd", newSelect);
+                    }
+                    function deleteTag(){
+                        if(count==1){
+                            alert("最少一个标签！");
+                            return;
+                        }else{
+                            document.getElementById("tag"+count).parentNode.removeChild(document.getElementById("tag"+count));
+                            count--;
+                        }
+
+                    }
+                </script>
                 悬赏分：
                 <select name="credit">
                     <option value="0" selected="selected">0</option>
@@ -40,6 +78,8 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
+                <br />
+                <br />
 
                 
                 <button class="green">提交</button>
