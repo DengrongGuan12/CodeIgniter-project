@@ -72,7 +72,7 @@
                     }
                 </script>
                 悬赏分：
-                <select name="credit">
+                <select name="credit" id="credit">
                     <?php for($i=0;$i<=$credit;$i++):?>
                         <option value=<?php echo($i);?>><?php echo($i);?></option>
                     <?php endfor;?>
@@ -104,6 +104,18 @@
                     }else{
                         $("#title-error").fadeOut();
                         $("#content-error").fadeOut();
+                        var credit=document.getElementById("credit");
+                        var index=credit.selectedIndex;
+                        var credit_value=credit.options[index].value;
+
+                        for(var i=1;i<=5;i++){
+                            if(document.getElementById("tag"+i)){
+                                var tag=document.getElementById("tag"+i);
+                                var index=tag.selectedIndex;
+                                var tag_value=tag.options[index].value;
+                            }
+
+                        }
                         title.value="";
                         content.value="";
                         return true;
