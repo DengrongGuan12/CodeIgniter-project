@@ -168,6 +168,27 @@ class Qanda_model extends CI_Model{
         }
         return $date;
     }
+    //插入问题，返回问题id
+    public function insertQuestion($title,$content,$user_name,$credit){
+        $date=date('Y-m-d H:i:s',time());
+//        echo($content);
+        $data=array(
+            "title"=>$title,
+            "content"=>$content,
+            "date"=>$date,
+            "user_name"=>$user_name,
+            "credit"=>$credit
+        );
+        $this->db->insert('qanda',$data);
+        $query = $this->db->query("SELECT LAST_INSERT_ID() as id from qanda");
+        if($query->num_rows()>0){
+            $row=$query->row_array();
+            $id=$row['id'];
+        }
+        return $id;
+
+
+    }
 
 }
 ?>

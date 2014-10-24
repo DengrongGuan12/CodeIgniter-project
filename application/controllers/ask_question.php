@@ -51,9 +51,18 @@ class Ask_question extends CI_Controller{
         $this->load->view('templates/footer', $data);
     }
     public function getData(){
-        $str = $_POST['content'];
+        $name=$this->session->userdata('name');
+        $content = $_POST['content'];
+//        echo($content);
 
-        echo $str;
+        $title=$_POST['title'];
+//        echo($title);
+        $credit=$_POST['credit'];
+        $this->load->model('qanda_model');
+        $id=$this->qanda_model->insertQuestion($title,$content,$name,$credit);
+//        echo($id);
+        echo($this->qanda_model->getContentById($id));
+
 
     }
 }

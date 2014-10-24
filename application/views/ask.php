@@ -90,6 +90,18 @@
                 </div>
             </form>
             <script type="text/javascript">
+                function contains(a, obj) {
+                    var i = a.length;
+                    if(i==0){
+                        return false;
+                    }
+                    while (i--) {
+                        if (a[i] === obj) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
                 function checkInputs(){
                     var title=document.form1.title;
                     var content=document.form1.content;
@@ -107,17 +119,27 @@
                         var credit=document.getElementById("credit");
                         var index=credit.selectedIndex;
                         var credit_value=credit.options[index].value;
-
+                        var tags=new Array();
                         for(var i=1;i<=5;i++){
                             if(document.getElementById("tag"+i)){
                                 var tag=document.getElementById("tag"+i);
                                 var index=tag.selectedIndex;
                                 var tag_value=tag.options[index].value;
+                                if(!contains(tags,tag_value)){
+                                    tags.push(tag_value);
+                                }else{
+                                    continue;
+                                }
                             }
 
                         }
-                        title.value="";
-                        content.value="";
+                        var len=tags.length;
+                        var tags_str=tags[0];
+                        for(var i=1;i<len;i++){
+                            tags_str=tags_str+","+tags[i];
+                        }
+//                        title.value="";
+//                        content.value="";
                         return true;
                     }
 
