@@ -60,7 +60,8 @@ class Question extends CI_Controller{
             $no_agree_answers[$aid]=array($this->praise_model->ifPraise($name,$aid),$content,$this->qanda_model->getUserById($aid),$this->praise_model->getNameCountById($aid));
         }
         //尚未被认同的答案
-        $data['answers']=$no_agree_answers;
+        $data['no_agree_answers']=$no_agree_answers;
+        $data['answer_count']=count($answers);
 
         $data['praise_count']=$this->praise_model->getNameCountById($id);
 

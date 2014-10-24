@@ -15,7 +15,7 @@
                 <?php else:?>
                     <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseQ/".$id);?>><button>点赞 <?=$praise_count?></button></a>
                 <?php endif;?>
-                <?php if(count($answers)==0):?>
+                <?php if($answer_count==0):?>
                     <?php if($name==$publisher):?>
                         <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/delete_my_question/".$id);?>><button>删除</button></a>
                     <?php endif;?>
@@ -45,16 +45,16 @@
                 </div>
             <?php endif;?>
 
-            <?php foreach(array_keys($answers) as $aid):?>
+            <?php foreach(array_keys($no_agree_answers) as $aid):?>
                 <div class="tl-post comments">
                     <span class="icon">&#59168;</span>
                     <p>
 
-                        <?php echo($answers[$aid][2]."的回答:".$answers[$aid][1]);?>
-                        <?php if($answers[$aid][0]):?>
-                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseA/".$aid."/".$id);?>><button>取消赞 <?=$answers[$aid][3]?></button></a>
+                        <?php echo($no_agree_answers[$aid][2]."的回答:".$no_agree_answers[$aid][1]);?>
+                        <?php if($no_agree_answers[$aid][0]):?>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseA/".$aid."/".$id);?>><button>取消赞 <?=$no_agree_answers[$aid][3]?></button></a>
                         <?php else:?>
-                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseA/".$aid."/".$id);?>><button>点赞 <?=$answers[$aid][3]?></button></a>
+                            <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/praiseA/".$aid."/".$id);?>><button>点赞 <?=$no_agree_answers[$aid][3]?></button></a>
                         <?php endif;?>
                         <?php if($end==0):?>
                             <?php if($name==$publisher):?>
