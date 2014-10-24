@@ -73,10 +73,9 @@
                 </script>
                 悬赏分：
                 <select name="credit">
-                    <option value="0" selected="selected">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <?php for($i=0;$i<=$credit;$i++):?>
+                        <option value=<?php echo($i);?>><?php echo($i);?></option>
+                    <?php endfor;?>
                 </select>
                 <br />
                 <br />
@@ -98,7 +97,7 @@
                         $("#title-error").fadeIn();
                         title.focus();
                         return false;
-                    }else if(content.value.length==0||content.value=="Initial content"||content.value=="<p><br></p>"){
+                    }else if(content.value.length==0||content.value=="<p>Initial content</p>"||content.value=="<p><br></p>"){
                         $("#content-error").fadeIn();
                         content.focus();
                         return false;
