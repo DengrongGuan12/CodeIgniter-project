@@ -168,9 +168,9 @@ class Qanda_model extends CI_Model{
         }
         return $date;
     }
-    //插入问题，返回问题id
-    public function insertQuestion($title,$content,$user_name,$credit){
-        $date=date('Y-m-d H:i:s',time());
+    //插入问题，如果成功返回问题id,如果失败（根据积分判断上传权限）返回0
+    public function insertQuestion($title,$content,$date,$user_name,$credit){
+
 //        echo($content);
         $data=array(
             "title"=>$title,
@@ -187,6 +187,25 @@ class Qanda_model extends CI_Model{
         }
         return $id;
 
+
+    }
+    //获取某人某天发布的问题id
+    public function getQidsByNameDate($name,$date){
+        $ids=array();
+        $this->db->where('user_name',$name);
+        $this->db->where('date',$date);
+        $this->db->where('to_id',0);
+        $this->db->select('id');
+        $query = $this->db->get('qanda');
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $row)
+            {
+                array_push($ids,$row->id);
+//                echo $row->id;
+            }
+        }
+        return $ids;
 
     }
 

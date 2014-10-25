@@ -82,12 +82,10 @@
 
                 
                 <button class="green">提交</button>
-                <div id="submit-error" class="red" style="margin-top: 3px;">
-                    <p>发布失败(你一天只能发布3个问题)!</p>
-                </div>
-                <div id="submit-success" class="orange" style="margin-top: 3px;">
-                    <p>发布成功(你可以在 管理->我发布的问题 中找到该问题)!</p>
-                </div>
+                <div id="submit-result"></div>
+
+
+
             </form>
             <script type="text/javascript">
                 function contains(a, obj) {
@@ -105,6 +103,7 @@
                 function checkInputs(){
                     var title=document.form1.title;
                     var content=document.form1.content;
+                    var submit_result=document.getElementById("submit-result");
                     if(title.value.length==0||title.value=="标题"){
                         $("#title-error").fadeIn();
                         title.focus();
@@ -138,9 +137,31 @@
                         for(var i=1;i<len;i++){
                             tags_str=tags_str+","+tags[i];
                         }
-//                        title.value="";
-//                        content.value="";
-                        return true;
+                        var url="http://127.0.0.1/CodeIgniter-project/index.php/ask_question/getData/";
+                        var ajax = null;
+                        var postStr="title="+title.value+"&content="+content.value+"&tags="+tags_str+"&credit="+credit_value;
+                        if(window.XMLHttpRequest){
+                            ajax = new XMLHttpRequest();
+                        }
+                        else if(window.ActiveXObject){
+                            ajax = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        else{
+                            return false;
+                        }
+                        ajax.open("POST",url,true);
+                        ajax.send(postStr);
+                        //返回数据的处理函数
+                        ajax.onreadystatechange = function(){
+                            if (ajax.readyState == 4 && ajax.status == 200){
+                                submit_result.innerHTML = ajax.responseText;
+                                title.value="";
+                                content.value="";
+                            }
+                        }
+
+
+                        return false;
                     }
 
                 }
