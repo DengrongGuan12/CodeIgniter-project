@@ -95,14 +95,14 @@ class Ask_question extends CI_Controller{
 
 //        echo($id);
 //                    echo($this->qanda_model->getContentById($id));
-                   echo("success");
+                   echo("submit-success");
 
                 }else{
-                    echo("credit_error");
+                    echo("submit-error3");
                     //悬赏分高于已有积分不能发布问题
                 }
             }else{
-                echo("error1");
+                echo("submit-error1");
                 //今天不能发布问题
             }
         }else{
@@ -127,13 +127,13 @@ class Ask_question extends CI_Controller{
                         $this->qa_tag_model->insert($id,$tag_id);
 
                     }
-                    echo("success");
+                    echo("submit-success");
                 }else{
                     //悬赏分高于已有积分不能发布问题
-                    echo("credit_error");
+                    echo("submit-error3");
                 }
             }else{
-                echo("error2");
+                echo("submit-error2");
 
             }
         }

@@ -25,7 +25,7 @@
         <?php else:?>
             <div class="profile-img">
                 <p><img src="<?php
-                    $file = "http://127.0.0.1/CodeIgniter-project/application/images/heads/gdr.gif";
+                    $file = "http://127.0.0.1/CodeIgniter-project/application/images/heads/".$name.".gif";
                     $fileExists = @file_get_contents($file,null,null,-1,1) ? true : false ;
                     if($fileExists){
                         echo "$base/$heads/"."$name".".gif";
@@ -90,10 +90,10 @@
     <ul>
         <li class="section"><a href="index.html"><span class="icon">&#128711;</span>Geek Q and A</a></li>
         <li>
-            <a href="pages-table.html"><span class="icon">&#128196;</span> 等待回答</a>
+            <a><span class="icon">&#128196;</span> 等待回答</a>
             <ul class="submenu">
-                <li><a href="page-new.html">最新</a></li>
-                <li><a href="page-timeline.html">热门</a></li>
+                <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_answer_questions">尚未回答</a></li>
+                <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_end_questions">尚未结帖</a></li>
             </ul>
         </li>
         <li>

@@ -39,6 +39,14 @@ class Question extends CI_Controller{
         $data['images']=$this->images;
         $data['heads']=$this->heads;
 
+        $this->load->model('qa_tag_model');
+        $tags=array();
+        $tag_ids=$this->qa_tag_model->getTagIdsByQid($id);
+        $this->load->model("tag_model");
+        foreach($tag_ids as $tag_id){
+            $tags[$tag_id]=$this->tag_model->getNameById($tag_id);
+        }
+        $data['tags']=$tags;
         $this->load->model('qanda_model');
         $data['id']=$id;
         $data['publisher']=$this->qanda_model->getUserById($id);
@@ -198,6 +206,48 @@ class Question extends CI_Controller{
         $this->load->view('templates/header', $data);
         $this->load->view('my_all_answers', $data);
         $this->load->view('templates/footer', $data);
+
+    }
+    public function no_answer_questions(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/no_answer_questions.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $this->load->model('qanda_model');
+        //记录尚未有回答的问题id
+        $no_answer_qids=array();
+        $qids=$this->qanda_model->getAllQids();
+        $to_ids=$this->qanda_model->getAllTo_ids();
+        foreach($qids as $qid){
+            $has_answer=0;
+            foreach($to_ids as $to_id){
+                if($qid==$to_id){
+                    $has_answer=1;
+                    break;
+                }
+            }
+            if($has_answer==0){
+                array_push($no_answer_qids,$qid);
+            }
+
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('no_answer_questions', $data);
+        $this->load->view('templates/footer', $data);
+
+
+
 
     }
 }

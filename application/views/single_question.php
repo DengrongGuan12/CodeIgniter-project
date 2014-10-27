@@ -24,7 +24,11 @@
             </aside>
         </header>
         <div class="content no-padding timeline">
-            <div>
+            <?php foreach(array_keys($tags) as $tag_id):?>
+<!--                进入标签下的所有问题-->
+                <a class="button" title="进入标签" href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/tag/all_questions/".$tag_id);?>"><?php echo($tags[$tag_id]);?></a>
+            <?php endforeach;?>
+            <div style="margin-top: 30px;">
                 <p>
                     <?php echo("内容：<br />".$content);?>
                 </p>

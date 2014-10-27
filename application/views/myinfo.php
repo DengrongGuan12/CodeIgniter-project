@@ -182,7 +182,7 @@
                             <span class="icon">&#59168;</span>
                             <p>
                                 <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$id);?>><?php echo($titles[$id]);?></a>
-                                <?php echo($contents[$id]);?>
+
                                 <!--                        <span class="reply"><input type="text" value="Respond to comment..."/></span>-->
                             </p>
                         </div>

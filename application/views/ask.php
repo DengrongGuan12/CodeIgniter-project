@@ -114,7 +114,6 @@
                 function checkInputs(){
                     var title=document.form1.title;
                     var content=document.form1.content;
-                    var submit_result=document.getElementById("submit-result");
                     if(title.value.length==0||title.value=="标题"||title.value.length>=128){
                         $("#title-error").fadeIn();
                         title.focus();
@@ -149,55 +148,41 @@
                             tags_str=tags_str+","+tags[i];
                         }
                         var url="http://127.0.0.1/CodeIgniter-project/index.php/ask_question/getData";
-                        var ajax = null;
-                        var postStr="title="+title.value+"&content="+content.value+"&tags="+tags_str+"&credit="+credit_value;
-                        if(window.XMLHttpRequest){
-                            ajax = new XMLHttpRequest();
-                        }
-                        else if(window.ActiveXObject){
-                            ajax = new ActiveXObject("Microsoft.XMLHTTP");
-                        }
-                        else{
-                            return false;
-                        }
-                        ajax.open("POST",url,true);
-                        //定义传输的文件HTTP头信息
-                        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-                        ajax.send(postStr);
-                        //返回数据的处理函数
-                        if (ajax.readyState == 4 && ajax.status == 200){
-                            if(ajax.responseText=="success"){
-                                $("#submit-success").fadeIn();
-                                $("#submit-error1").fadeOut();
-                                $("#submit-error2").fadeOut();
-                                $("#submit-error3").fadeOut();
-                            }else if(ajax.responseText=="error1"){
-                                $("#submit-error1").fadeIn();
-                                $("#submit-error2").fadeOut();
-                                $("#submit-error3").fadeOut();
-                                $("#submit-success").fadeOut();
-                            }else if(ajax.responseText=="error2"){
-                                $("#submit-error2").fadeIn();
-                                $("#submit-error1").fadeOut();
-                                $("#submit-error3").fadeOut();
-                                $("#submit-success").fadeOut();
-                            }else if(ajax.responseText=="credit_error"){
-                                $("#submit-error3").fadeIn();
-                                $("#submit-error1").fadeOut();
-                                $("#submit-error2").fadeOut();
-                                $("#submit-success").fadeOut();
+//                        var title = document.getElementById("title").value;
+//                        var content = editor.document.getBody().getHtml(); //取得html文本
+                        var data = {
+                            title: title.value,
+                            content: content.value,
+                            tags:tags_str,
+                            credit:credit_value
+                        };
+                        $.ajax({
+                            url: url,
+                            data: data,
+                            type: 'POST',
+                            success: function (msg) {
+                                showSubmitResult(msg);
+                                title.value="";
+                                content.value="";
+//                                alert(msg);
                             }
-                            title.value="";
-                            content.value="";
-                        }
-//                        ajax.onreadystatechange = function(){
-//                            alert(ajax.readyState);
-//
-//                        }
-
-
+                        });
                         return false;
+
+
                     }
+
+                }
+                function showSubmitResult(str){
+                    var results_array=new Array("submit-success","submit-error1","submit-error2","submit-error3");
+                    $("#"+str).fadeIn();
+                    for(var i=0;i<4;i++){
+                        if(results_array[i]==str){
+                            continue;
+                        }
+                        $("#"+results_array[i]).fadeOut();
+                    }
+
 
                 }
 

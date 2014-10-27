@@ -36,4 +36,15 @@ class Tag_model extends CI_Model{
         }
         return $tags;
     }
+    public function getNameById($id){
+        $this->db->select("name");
+        $this->db->where("id",$id);
+        $query=$this->db->get("tag");
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $name=$row['name'];
+        }
+        return $name;
+    }
 }

@@ -211,6 +211,29 @@ class Qanda_model extends CI_Model{
         return $ids;
 
     }
+    public function getAllQids(){
+        $ids=array();
+        $this->db->select('id');
+        $this->db->where('to_id',0);
+        $query=$this->db->get('qanda');
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($ids,$row->id);
+            }
+        }
+        return $ids;
+    }
+    //获取所有不为0的to_id
+    public function getAllTo_ids(){
+        $to_ids=array();
+        $query = $this->db->query("SELECT to_id FROM qanda WHERE to_id!= 0");
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($to_ids,$row->to_id);
+            }
+        }
+        return $to_ids;
+    }
 
 }
 ?>
