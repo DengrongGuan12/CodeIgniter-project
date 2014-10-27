@@ -12,7 +12,7 @@
                 <div class="field-wrap">
                     <input id="title" name="title" type="text" value="标题"/>
                     <div id="title-error" class="red" style="margin-top: 0px;">
-                        <p>标题不能为空！</p>
+                        <p>标题不能为空或者标题长度太长！</p>
                     </div>
                 </div>
                 <div class="green">
@@ -82,7 +82,18 @@
 
                 
                 <button class="green">提交</button>
-                <div id="submit-result"></div>
+                <div id='submit-success' class='orange' style='margin-top: 3px;'>
+                    <p>发布成功(你可以在 管理->我发布的问题 中找到该问题)!</p>
+                </div>
+                <div id='submit-error3' class='red' style='margin-top: 3px;'>
+                    <p>发布失败(你现在所拥有的积分不够支付你的悬赏分)!</p>
+                </div>
+                <div id='submit-error1' class='red' style='margin-top: 3px;'>
+                    <p>发布失败(你一天最多只能发布2个问题)!</p>
+                </div>
+                <div id='submit-error2' class='red' style='margin-top: 3px;'>
+                    <p>发布失败(你一天最多只能发布4个问题)!</p>
+                </div>
 
 
 
@@ -104,7 +115,7 @@
                     var title=document.form1.title;
                     var content=document.form1.content;
                     var submit_result=document.getElementById("submit-result");
-                    if(title.value.length==0||title.value=="标题"){
+                    if(title.value.length==0||title.value=="标题"||title.value.length>=128){
                         $("#title-error").fadeIn();
                         title.focus();
                         return false;
@@ -137,7 +148,7 @@
                         for(var i=1;i<len;i++){
                             tags_str=tags_str+","+tags[i];
                         }
-                        var url="http://127.0.0.1/CodeIgniter-project/index.php/ask_question/getData/";
+                        var url="http://127.0.0.1/CodeIgniter-project/index.php/ask_question/getData";
                         var ajax = null;
                         var postStr="title="+title.value+"&content="+content.value+"&tags="+tags_str+"&credit="+credit_value;
                         if(window.XMLHttpRequest){
@@ -150,15 +161,39 @@
                             return false;
                         }
                         ajax.open("POST",url,true);
+                        //定义传输的文件HTTP头信息
+                        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                         ajax.send(postStr);
                         //返回数据的处理函数
-                        ajax.onreadystatechange = function(){
-                            if (ajax.readyState == 4 && ajax.status == 200){
-                                submit_result.innerHTML = ajax.responseText;
-                                title.value="";
-                                content.value="";
+                        if (ajax.readyState == 4 && ajax.status == 200){
+                            if(ajax.responseText=="success"){
+                                $("#submit-success").fadeIn();
+                                $("#submit-error1").fadeOut();
+                                $("#submit-error2").fadeOut();
+                                $("#submit-error3").fadeOut();
+                            }else if(ajax.responseText=="error1"){
+                                $("#submit-error1").fadeIn();
+                                $("#submit-error2").fadeOut();
+                                $("#submit-error3").fadeOut();
+                                $("#submit-success").fadeOut();
+                            }else if(ajax.responseText=="error2"){
+                                $("#submit-error2").fadeIn();
+                                $("#submit-error1").fadeOut();
+                                $("#submit-error3").fadeOut();
+                                $("#submit-success").fadeOut();
+                            }else if(ajax.responseText=="credit_error"){
+                                $("#submit-error3").fadeIn();
+                                $("#submit-error1").fadeOut();
+                                $("#submit-error2").fadeOut();
+                                $("#submit-success").fadeOut();
                             }
+                            title.value="";
+                            content.value="";
                         }
+//                        ajax.onreadystatechange = function(){
+//                            alert(ajax.readyState);
+//
+//                        }
 
 
                         return false;

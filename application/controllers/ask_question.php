@@ -59,18 +59,20 @@ class Ask_question extends CI_Controller{
     public function getData(){
         $name=$this->session->userdata('name');
         $date=date('Y-m-d H:i:s',time());
+        $date_array=explode(" ",$date);
         $this->load->model('user_model');
         $use_credit=$_POST['credit'];
         $credit=$this->user_model->getCreditByName($name);
         $this->load->model('qanda_model');
         //今天发布的问题
-        $today_questions_num=count($this->qanda_model->getQidsByNameDate($name,$date));
+        $today_questions_num=count($this->qanda_model->getQidsByNameDate($name,$date_array[0]));
         if($credit<=10){
             if($today_questions_num<2){
                 //可以发布问题
                 //判断积分足够支付悬赏分，防止浏览器的数据篡改
                 if($credit>=$use_credit){
                     //可以发布问题
+                    $this->user_model->setCreditByName($name,($credit-$use_credit));
                     $content = $_POST['content'];
 //        echo($content);
 
@@ -83,7 +85,7 @@ class Ask_question extends CI_Controller{
 //        echo($title);
 
 
-                    $id=$this->qanda_model->insertQuestion($title,$content,$date,$name,$credit);
+                    $id=$this->qanda_model->insertQuestion($title,$content,$date,$name,$use_credit);
                     $this->load->model('qa_tag_model');
                     foreach($tags_array as $tag_id){
                         $this->qa_tag_model->insert($id,$tag_id);
@@ -93,20 +95,14 @@ class Ask_question extends CI_Controller{
 
 //        echo($id);
 //                    echo($this->qanda_model->getContentById($id));
-                   echo(" <div id='submit-success' class='orange' style='margin-top: 3px;'>
-                    <p>发布成功(你可以在 管理->我发布的问题 中找到该问题)!</p>
-                </div>");
+                   echo("success");
 
                 }else{
-                    echo("<div id='submit-error2' class='red' style='margin-top: 3px;'>
-                    <p>发布失败(你现在所拥有的积分不够支付你的悬赏分)!</p>
-                </div>");
+                    echo("credit_error");
                     //悬赏分高于已有积分不能发布问题
                 }
             }else{
-                echo("<div id='submit-error1' class='red' style='margin-top: 3px;'>
-                    <p>发布失败(你一天最多只能发布2个问题)!</p>
-                </div>");
+                echo("error1");
                 //今天不能发布问题
             }
         }else{
@@ -114,6 +110,7 @@ class Ask_question extends CI_Controller{
                 //
                 if($credit>=$use_credit){
                     //可以发布问题
+                    $this->user_model->setCreditByName($name,($credit-$use_credit));
                     $content = $_POST['content'];
 //        echo($content);
 
@@ -124,22 +121,19 @@ class Ask_question extends CI_Controller{
                     $tags=$_POST['tags'];
                     //标签id数组
                     $tags_array=explode(",",$tags);
-                    $id=$this->qanda_model->insertQuestion($title,$content,$date,$name,$credit);
+                    $id=$this->qanda_model->insertQuestion($title,$content,$date,$name,$use_credit);
                     $this->load->model('qa_tag_model');
                     foreach($tags_array as $tag_id){
                         $this->qa_tag_model->insert($id,$tag_id);
 
                     }
+                    echo("success");
                 }else{
                     //悬赏分高于已有积分不能发布问题
-                    echo("<div id='submit-error2' class='red' style='margin-top: 3px;'>
-                    <p>发布失败(你现在所拥有的积分不够支付你的悬赏分)!</p>
-                </div>");
+                    echo("credit_error");
                 }
             }else{
-                echo("<div id='submit-error1' class='red' style='margin-top: 3px;'>
-                    <p>发布失败(你一天最多只能发布4个问题)!</p>
-                </div>");
+                echo("error2");
 
             }
         }

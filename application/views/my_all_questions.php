@@ -11,7 +11,7 @@
                 <div class="tl-post comments">
                     <span class="icon">&#59168;</span>
                     <p>
-                        <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/my_question/".$id);?>><?php echo($titles[$id]);?></a>
+                        <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$id);?>><?php echo($titles[$id]);?></a>
                         <?php echo($contents[$id]);?>
                         <br />
                         创建于 <?php echo($dates[$id]);?>

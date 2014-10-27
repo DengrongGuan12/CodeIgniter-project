@@ -193,15 +193,18 @@ class Qanda_model extends CI_Model{
     public function getQidsByNameDate($name,$date){
         $ids=array();
         $this->db->where('user_name',$name);
-        $this->db->where('date',$date);
+        //$this->db->where('date',$date);
         $this->db->where('to_id',0);
-        $this->db->select('id');
+        $this->db->select('id,date');
         $query = $this->db->get('qanda');
         if ($query->num_rows() > 0)
         {
             foreach ($query->result() as $row)
             {
-                array_push($ids,$row->id);
+                if($date==explode(" ",$row->date)[0]){
+                    array_push($ids,$row->id);
+                }
+
 //                echo $row->id;
             }
         }

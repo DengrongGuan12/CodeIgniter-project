@@ -178,7 +178,7 @@
                     <h1>你尚未发布问题！</h1>
                 <?php else:?>
                     <?php foreach ($ids as $id): ?>
-                        <div class="tl-post">
+                        <div class="tl-post" style="height: 50px;">
                             <span class="icon">&#59168;</span>
                             <p>
                                 <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$id);?>><?php echo($titles[$id]);?></a>

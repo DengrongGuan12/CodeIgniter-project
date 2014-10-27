@@ -19,7 +19,9 @@
 <script type="text/javascript">
     $('#title-error').hide();
     $('#content-error').hide();
-    $('#submit-error').hide();
+    $('#submit-error1').hide();
+    $('#submit-error2').hide();
+    $('#submit-error3').hide();
     $('#submit-success').hide();
     // Feature slider for graphs
     $('.cycle').cycle({
