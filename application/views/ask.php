@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="green">
-                    <p>你可以通过复制粘贴来插入图片，像编辑word文档一样来编辑你的问题吧！</p>
+                    <p>你可以通过复制粘贴来插入图片(可以改变大小)，像编辑word文档一样来编辑你的问题吧！</p>
                 </div>
                 <div class="field-wrap wysiwyg-wrap">
                     <textarea value="输入具体内容" id="content" class="post" rows="5" name="content"></textarea>

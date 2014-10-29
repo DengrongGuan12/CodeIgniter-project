@@ -80,48 +80,78 @@ class Question extends CI_Controller{
 
     }
     public function cancel_praiseQ($id){
-        $name=$this->session->userdata('name');
-        $this->load->model('praise_model');
-        $this->praise_model->deleteByNameId($name,$id);
-        redirect('question/single_question/'.$id);
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $name=$this->session->userdata('name');
+            $this->load->model('praise_model');
+            $this->praise_model->deleteByNameId($name,$id);
+            redirect('question/single_question/'.$id);
+        }
+
     }
     public function cancel_praiseA($aid,$qid){
-        $name=$this->session->userdata('name');
-        $this->load->model('praise_model');
-        $this->praise_model->deleteByNameId($name,$aid);
-        redirect('question/single_question/'.$qid);
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $name=$this->session->userdata('name');
+            $this->load->model('praise_model');
+            $this->praise_model->deleteByNameId($name,$aid);
+            redirect('question/single_question/'.$qid);
+        }
+
     }
     public function praiseQ($id){
-        $name=$this->session->userdata('name');
-        $this->load->model('praise_model');
-        $this->praise_model->insert($name,$id);
-        redirect('question/single_question/'.$id);
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $name=$this->session->userdata('name');
+            $this->load->model('praise_model');
+            $this->praise_model->insert($name,$id);
+            redirect('question/single_question/'.$id);
+        }
+
     }
     public function praiseA($aid,$qid){
-        $name=$this->session->userdata('name');
-        $this->load->model('praise_model');
-        $this->praise_model->insert($name,$aid);
-        redirect('question/single_question/'.$qid);
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $name=$this->session->userdata('name');
+            $this->load->model('praise_model');
+            $this->praise_model->insert($name,$aid);
+            redirect('question/single_question/'.$qid);
+        }
+
 
     }
     public function delete_my_question($id){
-        $name=$this->session->userdata('name');
-        $this->load->model('qanda_model');
-        $credit=$this->qanda_model->getCreditById($id);
-        $this->load->model('user_model');
-        $this->user_model->addCreditByName($name,$credit);
-        $this->qanda_model->deleteById($id);
-        $this->load->model('praise_model');
-        $this->praise_model->deleteById($id);
-        redirect("pages/myinfo/");
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $name=$this->session->userdata('name');
+            $this->load->model('qanda_model');
+            $credit=$this->qanda_model->getCreditById($id);
+            $this->load->model('user_model');
+            $this->user_model->addCreditByName($name,$credit);
+            $this->qanda_model->deleteById($id);
+            $this->load->model('praise_model');
+            $this->praise_model->deleteById($id);
+            redirect("pages/myinfo/");
+        }
+
 
     }
     public function agree($qid,$aid){
-        $this->load->model('qanda_model');
-        $this->qanda_model->setEndById($qid,$aid);
-        $this->load->model('user_model');
-        $this->user_model->addCreditByName($this->qanda_model->getUserById($aid),$this->qanda_model->getCreditById($qid));
-        redirect("question/single_question/".$qid);
+        if($this->session->userdata('status')!='OK'){
+            redirect('pages/loginpage');
+        }else{
+            $this->load->model('qanda_model');
+            $this->qanda_model->setEndById($qid,$aid);
+            $this->load->model('user_model');
+            $this->user_model->addCreditByName($this->qanda_model->getUserById($aid),$this->qanda_model->getCreditById($qid));
+            redirect("question/single_question/".$qid);
+        }
+
 
     }
     public function my_all_questions(){
@@ -242,6 +272,20 @@ class Question extends CI_Controller{
             }
 
         }
+        $title=array();
+        $date=array();
+        $user=array();
+        foreach($no_answer_qids as $id){
+            $title[$id]=$this->qanda_model->getTitleById($id);
+            $date[$id]=$this->qanda_model->getDateById($id);
+            $user[$id]=$this->qanda_model->getUserById($id);
+        }
+        $data['ids']=$no_answer_qids;
+        $data['titles']=$title;
+        $data['dates']=$date;
+        $data['users']=$user;
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('no_answer_questions', $data);
         $this->load->view('templates/footer', $data);
@@ -250,4 +294,5 @@ class Question extends CI_Controller{
 
 
     }
+
 }

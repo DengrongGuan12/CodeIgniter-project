@@ -235,5 +235,18 @@ class Qanda_model extends CI_Model{
         return $to_ids;
     }
 
+    public function insertAnswer($content,$user_name,$qid){
+        $date=date('Y-m-d H:i:s',time());
+        $data=array(
+            "content"=>$content,
+            "date"=>$date,
+            "user_name"=>$user_name,
+            "to_id"=>$qid
+        );
+        $this->db->insert('qanda',$data);
+
+
+    }
+
 }
 ?>

@@ -53,7 +53,7 @@ class Pages extends CI_Controller{
                 'name'=>$name
             );
             $this->session->set_userdata($newdata);
-            redirect('pages/test');
+            redirect('question/no_answer_questions');
         }else{
             redirect('pages/loginpage/0');
         }
@@ -61,7 +61,7 @@ class Pages extends CI_Controller{
     }
     public function logout(){
         $this->session->sess_destroy();
-        redirect('pages/test');
+        redirect('question/no_answer_questions');
     }
     public function sign(){
         $name=$_POST['name'];
@@ -76,7 +76,7 @@ class Pages extends CI_Controller{
                 'name'=>$name
             );
             $this->session->set_userdata($newdata);
-            redirect('pages/test');
+            redirect('question/no_answer_questions');
 
         }
 

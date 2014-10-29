@@ -9,6 +9,7 @@
             </hgroup>
 
             <aside>
+                <a href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/answer_question/answer/".$id);?>"><button>我来回答</button></a>
 
                 <?php if($ifPraise):?>
                     <a href=<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/question/cancel_praiseQ/".$id);?>><button>取消赞 <?=$praise_count?></button></a>
@@ -28,6 +29,11 @@
 <!--                进入标签下的所有问题-->
                 <a class="button" title="进入标签" href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/tag/all_questions/".$tag_id);?>"><?php echo($tags[$tag_id]);?></a>
             <?php endforeach;?>
+            <div>
+                <p>
+                    <?php echo("发布者:".$publisher);?>
+                </p>
+            </div>
             <div style="margin-top: 30px;">
                 <p>
                     <?php echo("内容：<br />".$content);?>

@@ -208,7 +208,7 @@
                     <h1>你尚未回答问题！</h1>
                 <?php else:?>
                     <?php foreach(array_keys($Acontents) as $id):?>
-                        <div class="tl-post">
+                        <div class="tl-post" style="height: 70px;">
                             <span class="icon">&#9993;</span>
                             <p>
                                 <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$AqIds[$id]);?>>
