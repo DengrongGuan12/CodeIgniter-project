@@ -85,4 +85,81 @@ class User_model extends CI_Model{
         $this->db->where('name', $name);
         $this->db->update('user', $data);
     }
+    public function getAllUsers($order=""){
+        $ids=array();
+        if($order=="credit"){
+            $query=$this->db->query("select id,credit from user ORDER BY credit desc");
+
+        }else{
+            $query=$this->db->query("select id from user ORDER BY id desc");
+        }
+
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($ids,$row->id);
+            }
+        }
+        return $ids;
+
+    }
+    public function getDateById($id){
+        $this->db->select('date');
+        $query = $this->db->get_where('user', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $date=$row['date'];
+        }
+        return $date;
+    }
+    public function getCreditById($id){
+        $this->db->select('credit');
+        $query = $this->db->get_where('user', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $credit=$row['credit'];
+        }
+        return $credit;
+    }
+    public function getNameById($id){
+        $this->db->select('name');
+        $query = $this->db->get_where('user', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $name=$row['name'];
+        }
+        return $name;
+    }
+    public function getUsersByDate($date){
+        $ids=array();
+        $query=$this->db->query("select id,date from user ORDER BY id desc");
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                $time=$row->date;
+                $time_array=explode(" ",$time);
+
+                if($time_array[0]==$date){
+                    array_push($ids,$row->id);
+                }
+            }
+        }
+        return $ids;
+
+    }
+    public function searchUsers($key=""){
+        $ids=array();
+        $this->db->select('id');
+        $this->db->like('name',$key);
+        $query=$this->db->get('user');
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($ids,$row->id);
+            }
+        }
+        return $ids;
+
+
+    }
 }

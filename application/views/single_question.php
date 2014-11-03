@@ -25,19 +25,29 @@
             </aside>
         </header>
         <div class="content no-padding timeline">
-            <?php foreach(array_keys($tags) as $tag_id):?>
-<!--                进入标签下的所有问题-->
-                <a class="button" title="进入标签" href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/tag/all_questions/".$tag_id);?>"><?php echo($tags[$tag_id]);?></a>
-            <?php endforeach;?>
             <div>
+                <p>
+                    <?php foreach(array_keys($tags) as $tag_id):?>
+                        <!--                进入标签下的所有问题-->
+                        <a class="button tag" title="进入标签" href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/tag/all_questions_of_tag/".$tag_id);?>"><?php echo($tags[$tag_id]);?><span class="pip tag-pip"><?php echo($q_count_of_tag[$tag_id]);?></span></a>
+                    <?php endforeach;?>
+                </p>
+            </div>
+
+
+            <br />
+            <br />
+            <div style="margin-top: 50px;">
                 <p>
                     <?php echo("发布者:".$publisher);?>
                 </p>
             </div>
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 10px;">
                 <p>
                     <?php echo("内容：<br />".$content);?>
                 </p>
+
+
             </div>
             <?php if($end!=0):?>
                 <div class="tl-post comments">

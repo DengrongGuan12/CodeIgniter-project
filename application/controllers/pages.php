@@ -209,5 +209,82 @@ class Pages extends CI_Controller{
         echo "<font color='aqua'>修改成功！</font>";
 
     }
+    public function search(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/search.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $key=$_POST['search'];
+
+        $this->load->model('user_model');
+        $dates=array();
+        $credits=array();
+        $names=array();
+        $user_ids=$this->user_model->searchUsers($key);
+        foreach($user_ids as $id){
+            $dates[$id]=$this->user_model->getDateById($id);
+            $credits[$id]=$this->user_model->getCreditById($id);
+            $names[$id]=$this->user_model->getNameById($id);
+        }
+        //用户
+        $data['user_ids']=$user_ids;
+        $data['dates']=$dates;
+        $data['credits']=$credits;
+        $data['names']=$names;
+
+        //问答
+        $this->load->model('qanda_model');
+
+        $qa_ids=$this->qanda_model->searchQA($key);
+        //问题id 用来进入答案对应的问题页面
+        $qids=array();
+        //如果是问题显示title，如果是答案显示内容
+        $contents=array();
+
+        $qa_dates=array();
+        foreach($qa_ids as $id){
+            $qa_dates[$id]=$this->qanda_model->getDateById($id);
+            if($this->qanda_model->isQuestion($id)){
+                //这是问题
+                $contents[$id]=$this->qanda_model->getTitleById($id);
+            }else{
+                $contents[$id]=$this->qanda_model->getContentById($id);
+            }
+            $qids[$id]=$this->qanda_model->getQidById($id);
+        }
+        $data['qa_ids']=$qa_ids;
+        $data['qa_dates']=$qa_dates;
+        $data['qids']=$qids;
+        $data['contents']=$contents;
+
+        $this->load->model('tag_model');
+        $tags=$this->tag_model->search($key);
+        $data['tags']=$tags;
+        $this->load->model('qa_tag_model');
+        $q_count_of_tag=array();
+        foreach(array_keys($tags) as $id){
+            $q_count_of_tag[$id]=count($this->qa_tag_model->getQidsByTagid($id));
+        }
+        $data['q_count_of_tag']=$q_count_of_tag;
+        //$this->load->view('templates/header', $data);
+        $this->load->view("search", $data);
+        //$this->load->view('templates/footer', $data);
+
+
+
+
+
+    }
 }
 ?>

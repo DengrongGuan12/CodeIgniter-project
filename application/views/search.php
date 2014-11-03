@@ -7,6 +7,7 @@
     <meta name="keywords" content="" />
     <meta name="robots" content="" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="<?php echo "$base/$css/"."jquery-ui.css";?>" media="all" />
     <link rel="stylesheet" href="<?php echo "$base/$css/"."style.css";?>" media="all" />
     <link rel="stylesheet" href="<?php echo "$base/$css/"."ui.css";?>" media="all" />
 
@@ -133,3 +134,109 @@
         </li>
     </ul>
 </nav>
+<section class="content">
+    <div class="widget-container">
+        <section class="widget">
+            <header>
+                <span class="icon">&#59243;</span>
+                <hgroup>
+                    <h1>搜索结果</h1>
+                </hgroup>
+            </header>
+            <div class="content">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1">用户</a></li>
+                        <li><a href="#tabs-2">问答</a></li>
+                        <li><a href="#tabs-3">标签</a></li>
+                    </ul>
+                    <div id="tabs-1" style="height:230px;overflow: auto;">
+                        <?php if(count($user_ids)==0):?>
+                            <p>未找到匹配的用户！</p>
+                        <?php else:?>
+                            <div class="content no-padding timeline">
+                                <?php foreach($user_ids as $id):?>
+                                    <div class="tl-post">
+                                        <span class="icon">&#128100;</span>
+                                        <p>
+                                            <img src="<?php
+                                            $file = "http://127.0.0.1/CodeIgniter-project/application/images/heads/".$names[$id].".gif";
+                                            $fileExists = @file_get_contents($file,null,null,-1,1) ? true : false ;
+                                            if($fileExists){
+                                                echo "$base/$heads/"."$names[$id]".".gif";
+
+                                            }else{
+                                                echo "$base/$heads/"."default.gif";
+
+                                            }
+
+                                            ?>" alt="" height="40" width="40" /> <?php echo $names[$id];?>
+                                            积分：<?php echo($credits[$id]);?>
+                                            注册时间:<?php echo($dates[$id]);?>
+                                            <!--                        <span class="reply"><input type="text" value="Respond to comment..."/></span>-->
+                                        </p>
+                                    </div>
+                                <?php endforeach;?>
+
+
+                            </div>
+                        <?php endif;?>
+
+                    </div>
+                    <div id="tabs-2" style="height:230px;overflow: auto;">
+                        <?php if(count($qa_ids)==0):?>
+                            <p>未找到匹配的问题或答案！</p>
+                        <?php else:?>
+                            <div class="content no-padding timeline">
+                                <?php foreach ($qa_ids as $id): ?>
+                                    <div class="tl-post comments">
+                                        <span class="icon">&#59168;</span>
+                                        <p>
+                                            <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$qids[$id]);?>><?php echo($contents[$id]);?></a>
+
+                                            <br />
+                                            创建于 <?php echo($qa_dates[$id]);?>
+                                            <!--                        <span class="reply"><input type="text" value="Respond to comment..."/></span>-->
+                                        </p>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif;?>
+
+                    </div>
+                    <div id="tabs-3" style="height:230px;overflow: auto;">
+                        <?php if(count($tags)==0):?>
+                            <p>未找到匹配的标签！</p>
+                        <?php else:?>
+                            <p>
+                                <?php foreach(array_keys($tags) as $id):?>
+                                    <a class="tag button" title="进入标签" href="<?php echo("http://127.0.0.1/CodeIgniter-project/index.php/tag/all_questions_of_tag/".$id);?>">
+                                        <?php echo($tags[$id]);?>
+                                        <span class="pip tag-pip"><?php echo($q_count_of_tag[$id]);?></span>
+                                    </a>
+                                <?php endforeach;?>
+                            </p>
+                        <?php endif;?>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<script src="<?php echo "$base/$js/"."jquery.min.js";?>"></script>
+<script src="<?php echo "$base/$js/"."jquery.wysiwyg.js";?>"></script>
+<script src="<?php echo "$base/$js/"."custom.js";?>"</script>
+<script src="<?php echo "$base/$js/"."jquery.checkbox.min.js";?>"></script>
+
+<script src="<?php echo "$base/$js/"."jquery.tablesorter.min.js";?>"></script>
+<script src="<?php echo "$base/$js/"."jquery-ui.js";?>"></script>
+
+<script type="text/javascript">
+    $( "#tabs" ).tabs();
+
+
+</script>
+</body>
+</html>

@@ -94,7 +94,7 @@ p {
 
 a:link, a:active, a:visited {
 	text-decoration: none;
-	color: #5daced;
+	color: rgba(159, 93, 140, 1);
 }
 
 *:focus {
@@ -815,8 +815,8 @@ ul li ul.submenu li:hover:first-child {
 	background: #313131;
 	padding: 3px 10px;
 	position: absolute;
-	top: 29px;
-	right: 15px;
+	top: 6px;
+	right: 10px;
 	color: white;
 	text-align: center;
 	font-size: 10px;
@@ -828,6 +828,10 @@ ul li ul.submenu li:hover:first-child {
 	border-radius: 30px;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
+}
+.tag-pip{
+    top:0px !important;
+    right: 0px !important;
 }
 
 ul li:hover .pip, ul li.section .pip {
@@ -1931,4 +1935,88 @@ ul.icon-fonts li .html {
 }
 .delete:before {
     content: "✘";
+}
+
+.input-group{
+    margin-bottom: 10px;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+
+}
+.input-group-btn {
+    position: relative;
+    font-size: 0px;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    display: table-cell;
+    border-collapse: separate;
+}
+.input-group-btn:first-child > .btn{
+    margin-right: -1px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    position: relative;
+}
+.btn-default {
+    color: #333;
+    background-color: #FFF;
+    border-color: #CCC;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.form-control{
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075)
+}
+.tag{
+    display: inline-block;
+    overflow: hidden;
+    width: 66px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    text-align: center;
+    color: #555;
+    font-family: "microsoft yahei";
+    font-weight: 100;
+    word-wrap: break-word;
+    white-space: nowrap;
+    float: left;
+    margin: 9px 0px 0px 9px;
+    border-radius: 2px;
+    background: none repeat scroll 0% 0% #FFF;
+    border: 1px solid #D8D8D8;
+    transition: all 0.2s ease-in-out 0s;
+    text-decoration: none;
+
 }

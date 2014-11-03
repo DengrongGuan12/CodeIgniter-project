@@ -29,5 +29,17 @@ class Qa_tag_model extends CI_Model{
         }
         return $tag_ids;
     }
+    public function getQidsByTagid($tag_id){
+        $qids=array();
+        $this->db->where('tag_id',$tag_id);
+        $this->db->select('qa_id');
+        $query=$this->db->get('qa_tag');
+        if($query->num_rows()){
+            foreach($query->result() as $row){
+                array_push($qids,$row->qa_id);
+            }
+        }
+        return $qids;
+    }
 
 }

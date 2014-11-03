@@ -41,12 +41,15 @@ class Question extends CI_Controller{
 
         $this->load->model('qa_tag_model');
         $tags=array();
+        $q_count_of_tag=array();
         $tag_ids=$this->qa_tag_model->getTagIdsByQid($id);
         $this->load->model("tag_model");
         foreach($tag_ids as $tag_id){
             $tags[$tag_id]=$this->tag_model->getNameById($tag_id);
+            $q_count_of_tag[$tag_id]=count($this->qa_tag_model->getQidsByTagid($tag_id));
         }
         $data['tags']=$tags;
+        $data['q_count_of_tag']=$q_count_of_tag;
         $this->load->model('qanda_model');
         $data['id']=$id;
         $data['publisher']=$this->qanda_model->getUserById($id);
@@ -294,5 +297,193 @@ class Question extends CI_Controller{
 
 
     }
+    public function no_end_questions(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/no_end_questions.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $this->load->model("qanda_model");
+        $qids=$this->qanda_model->getAllNoEndQids();
+        $titles=array();
+        $dates=array();
+        $users=array();
+        foreach($qids as $qid){
+            $titles[$qid]=$this->qanda_model->getTitleById($qid);
+            $dates[$qid]=$this->qanda_model->getDateById($qid);
+            $users[$qid]=$this->qanda_model->getUserById($qid);
+
+        }
+        $data['ids']=$qids;
+        $data['titles']=$titles;
+        $data['users']=$users;
+        $data['dates']=$dates;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('no_end_questions', $data);
+        $this->load->view('templates/footer', $data);
+
+
+    }
+
+    public function hot_questions(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/hot_questions.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+
+        $this->load->model("praise_model");
+        $this->load->model("qanda_model");
+        //有赞的问题
+        $qid_praises=$this->praise_model->getHotQids();
+        //无赞的问题
+        $qids=$this->qanda_model->getAllQids();
+        foreach($qids as $qid){
+            if(!array_key_exists($qid,$qid_praises)){
+                $qid_praises[$qid]=0;
+            }
+        }
+        $titles=array();
+        $dates=array();
+        $users=array();
+        foreach(array_keys($qid_praises) as $qid){
+            $titles[$qid]=$this->qanda_model->getTitleById($qid);
+            $dates[$qid]=$this->qanda_model->getDateById($qid);
+            $users[$qid]=$this->qanda_model->getUserById($qid);
+
+        }
+
+        $data['qid_praises']=$qid_praises;
+        $data['titles']=$titles;
+        $data['users']=$users;
+        $data['dates']=$dates;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('hot_questions', $data);
+        $this->load->view('templates/footer', $data);
+    }
+    //月最热
+    public function more_praise_in_month(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/more_praise_in_month.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $this->load->model('praise_model');
+        $this->load->model('qanda_model');
+        //有赞的问题
+        $qid_praises=$this->praise_model->getQidPraiseInMonth();
+        $this->load->model('sort');
+        $sorted_qids=$this->sort->quick_sort(array_keys($qid_praises),$qid_praises);
+        //无赞的问题
+        $qids=$this->qanda_model->getAllQids();
+        foreach($qids as $qid){
+            if(!array_key_exists($qid,$qid_praises)){
+                $qid_praises[$qid]=0;
+                array_push($sorted_qids,$qid);
+            }
+        }
+        $titles=array();
+        $dates=array();
+        $users=array();
+        foreach(array_keys($qid_praises) as $qid){
+            $titles[$qid]=$this->qanda_model->getTitleById($qid);
+            $dates[$qid]=$this->qanda_model->getDateById($qid);
+            $users[$qid]=$this->qanda_model->getUserById($qid);
+
+        }
+        $data['sorted_qids']=$sorted_qids;
+        $data['qid_praises']=$qid_praises;
+        $data['titles']=$titles;
+        $data['users']=$users;
+        $data['dates']=$dates;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('more_praise_in_month', $data);
+        $this->load->view('templates/footer', $data);
+    }
+    //周最热
+    public function more_praise_in_week(){
+        $status=$this->session->userdata('status');
+        $name=$this->session->userdata('name');
+        if ( ! file_exists(APPPATH.'/views/more_praise_in_week.php'))
+        {
+            // 页面不存在
+            show_404();
+        }
+        $data['status']=$status;
+        $data['name']=$name;
+        $data['base']=$this->base;
+        $data['css']=$this->css;
+        $data['js']=$this->js;
+        $data['images']=$this->images;
+        $data['heads']=$this->heads;
+
+        $this->load->model('praise_model');
+        $this->load->model('qanda_model');
+        //有赞的问题
+        $qid_praises=$this->praise_model->getQidPraiseInWeek();
+        $this->load->model('sort');
+        $sorted_qids=$this->sort->quick_sort(array_keys($qid_praises),$qid_praises);
+        //无赞的问题
+        $qids=$this->qanda_model->getAllQids();
+        foreach($qids as $qid){
+            if(!array_key_exists($qid,$qid_praises)){
+                $qid_praises[$qid]=0;
+                array_push($sorted_qids,$qid);
+            }
+        }
+        $titles=array();
+        $dates=array();
+        $users=array();
+        foreach(array_keys($qid_praises) as $qid){
+            $titles[$qid]=$this->qanda_model->getTitleById($qid);
+            $dates[$qid]=$this->qanda_model->getDateById($qid);
+            $users[$qid]=$this->qanda_model->getUserById($qid);
+
+        }
+
+        $data['sorted_qids']=$sorted_qids;
+        $data['qid_praises']=$qid_praises;
+        $data['titles']=$titles;
+        $data['users']=$users;
+        $data['dates']=$dates;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('more_praise_in_week', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
 
 }

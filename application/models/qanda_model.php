@@ -213,9 +213,7 @@ class Qanda_model extends CI_Model{
     }
     public function getAllQids(){
         $ids=array();
-        $this->db->select('id');
-        $this->db->where('to_id',0);
-        $query=$this->db->get('qanda');
+        $query=$this->db->query("SELECT id from qanda where to_id=0 ORDER BY id desc");
         if($query->num_rows()>0){
             foreach($query->result() as $row){
                 array_push($ids,$row->id);
@@ -246,6 +244,68 @@ class Qanda_model extends CI_Model{
         $this->db->insert('qanda',$data);
 
 
+    }
+    //获取所有尚未结帖的问题id
+    public function getAllNoEndQids(){
+        $ids=array();
+        $query=$this->db->query("select id from qanda where to_id=0 AND end=0 ORDER BY id desc");
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($ids,$row->id);
+            }
+        }
+        return $ids;
+
+    }
+
+    public function searchQA($key=""){
+        $ids=array();
+        $this->db->select('id');
+        $this->db->like('title',$key);
+        $this->db->or_like('content',$key);
+        $query=$this->db->get('qanda');
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                array_push($ids,$row->id);
+            }
+        }
+        return $ids;
+
+    }
+    public function isQuestion($id){
+        $isQuestion=1;
+        $this->db->select('to_id');
+        $query = $this->db->get_where('qanda', array('id' => $id));
+        if ($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+            $to_id=$row['to_id'];
+        }
+        if($to_id!=0){
+            $isQuestion=0;
+        }
+        return $isQuestion;
+
+    }
+    public function getQidById($id){
+        $qid=0;
+        while(TRUE){
+            $this->db->where('id',$id);
+            $this->db->select('to_id');
+            $query=$this->db->get('qanda');
+            if ($query->num_rows() > 0)
+            {
+                $row = $query->row_array();
+                $to_id=$row['to_id'];
+            }
+            if($to_id==0){
+                $qid=$id;
+                break;
+            }else{
+                $id=$to_id;
+            }
+        }
+        return $qid;
     }
 
 }
