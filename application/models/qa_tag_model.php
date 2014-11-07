@@ -41,5 +41,10 @@ class Qa_tag_model extends CI_Model{
         }
         return $qids;
     }
+    public function deleteByQid($id){
+        $this->db->where('qa_id',$id);
+
+        $this->db->delete('qa_tag');
+    }
 
 }

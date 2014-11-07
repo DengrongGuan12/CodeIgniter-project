@@ -6,10 +6,9 @@
                 <h1>我的所有回答</h1>
             </hgroup>
         </header>
-        <div class="content no-padding timeline">
+        <div class="content">
             <?php foreach(array_keys($Acontents) as $id):?>
-                <div class="tl-post">
-                    <span class="icon">&#9993;</span>
+                <div class="mini-answer">
                     <p>
                         <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$AqIds[$id]);?>>
                             <?php echo($Acontents[$id]);?>

@@ -102,28 +102,28 @@
     <ul>
         <li class="section"><a href="http://127.0.0.1/CodeIgniter-project/"><span class="icon">&#128711;</span>Geek Q and A</a></li>
         <li>
-            <a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_answer_questions"><span class="icon">&#128196;</span> 等待回答</a>
+            <a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_end_questions"><span class="icon">&#128196;</span> 等待回答</a>
             <ul class="submenu">
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_answer_questions">尚未回答</a></li>
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/no_end_questions">尚未结帖</a></li>
             </ul>
         </li>
         <li>
-            <a href="http://127.0.0.1/CodeIgniter-project/index.php/question/hot_questions"><span class="icon">&#127748;</span> 热门问答<span class="pip">7</span></a>
+            <a href="http://127.0.0.1/CodeIgniter-project/index.php/question/hot_questions"><span class="icon">&#127748;</span> 热门问答</a>
             <ul class="submenu">
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/more_praise_in_week">周最热</a></li>
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/question/more_praise_in_month">月最热</a></li>
             </ul>
         </li>
         <li>
-            <a href="http://127.0.0.1/CodeIgniter-project/index.php/tag/all_tags"><span class="icon">&#59160;</span> 标签<span class="pip">12</span></a>
+            <a href="http://127.0.0.1/CodeIgniter-project/index.php/tag/all_tags"><span class="icon">&#59160;</span> 标签</a>
             <ul class="submenu">
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/tag/hot_tags">热门</a></li>
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/tag/all_tags">所有标签</a></li>
                 <!--				<li><a href="comments-timeline.html">View comments</a></li>-->
             </ul>
         </li>
-        <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/user/all_users"><span class="icon">&#128101;</span> 用户 <span class="pip">3</span></a>
+        <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/user/all_users"><span class="icon">&#128101;</span> 用户</a>
             <ul class="submenu">
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/user/new_users">新用户</a></li>
                 <li><a href="http://127.0.0.1/CodeIgniter-project/index.php/user/users_of_more_credit">积分最多</a></li>

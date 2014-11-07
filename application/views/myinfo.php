@@ -1,9 +1,4 @@
-<section class="alert">
-    <div class="green">
-        <p>你好，gdr <a href="#">你发布的问题</a> 有新回答啦！</p>
-        <span class="close">&#10006;</span>
-    </div>
-</section>
+
 <section class="content">
     <div class="widget-container">
         <section class="widget small">
@@ -203,13 +198,12 @@
                     <h1>我的回答</h1>
                 </hgroup>
             </header>
-            <div class="content no-padding timeline">
+            <div class="content">
                 <?php if(count($Acontents)==0):?>
                     <h1>你尚未回答问题！</h1>
                 <?php else:?>
                     <?php foreach(array_keys($Acontents) as $id):?>
-                        <div class="tl-post" style="height: 70px;">
-                            <span class="icon">&#9993;</span>
+                        <div class="mini-answer" style="height: 70px;">
                             <p>
                                 <a title="进入问题" href=<?php echo ("http://127.0.0.1/CodeIgniter-project/index.php/question/single_question/".$AqIds[$id]);?>>
                                     <?php echo($Acontents[$id]);?>

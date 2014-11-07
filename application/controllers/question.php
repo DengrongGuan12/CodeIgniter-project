@@ -139,6 +139,8 @@ class Question extends CI_Controller{
             $this->qanda_model->deleteById($id);
             $this->load->model('praise_model');
             $this->praise_model->deleteById($id);
+            $this->load->model('qa_tag_model');
+            $this->qa_tag_model->deleteByQid($id);
             redirect("pages/myinfo/");
         }
 
